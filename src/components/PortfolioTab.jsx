@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
 
 const projects = [
-  {
-    id: 'p1',
-    img: '/project1.png',
-    fallback: 'https://via.placeholder.com/400x250?text=Core+Dynamics',
-    title: 'Modern E-Commerce UI',
-    subtitle: 'Full Responsive E-Commerce Website',
-    detailTitle: 'E-Commerce Website',
-    tech: 'HTML • CSS • JavaScript • API',
-    desc: 'A modern and responsive e-commerce front-end built with a clean product layout, smooth UI elements, and a professional shopping experience. Designed with a focus on performance, usability, and real-world online store structure.',
-    features: ['Product Grid & Category Layout', 'Responsive UI (Tailwind CSS)', 'Clean Front-End Architecture'],
-    demo: 'https://umar2334.github.io/project-1-umar-store/',
-  },
+  
   // {
   //   id: 'p2',
   //   img: '/project2.png',
@@ -25,20 +14,8 @@ const projects = [
   //   features: ['Secure Login UI with Validation', 'Fully Responsive Interface', 'Real-World Society / Housing Portal Design'],
   //   demo: 'https://umar2334.github.io/society-managment-portal/',
   // },
-  {
-    id: 'p3',
-    img: 'pic123.jpeg',
-    fallback: 'https://via.placeholder.com/400x250?text=WP+Themes',
-    title: 'Society Management app',
-    subtitle: 'Society Management app (flutter  / dart / firebase)',
-    detailTitle: 'Society Management app',
-    tech: 'FLUTTER • DART • FIREBASE .API',
-    desc: 'Designed and developed a fully responsive Society Management app with a clean login interface and a structured layout for residents and administrators. This project demonstrates strong front-end architecture, UI/UX design clarity, and real-world functionality for community & housing management.',
-    features: ['Secure Login UI with Validation', 'Fully Responsive Interface', 'Real-World Society / Housing Portal Design'],
-    demo: 'https://umar2334.github.io/society-managment-portal/',
-  },
 {
-    id: 'p4',
+    id: 'p1',
     img: 'apnacv.png',
     fallback: 'https://via.placeholder.com/400x250?text=WP+Themes',
     title: 'APNNCV',
@@ -51,7 +28,7 @@ const projects = [
   },
 
 {
-    id: 'p5',
+    id: 'p2',
     img: 'finance.png',
     fallback: 'https://via.placeholder.com/400x250?text=WP+Themes',
     title: 'Finance App',
@@ -62,6 +39,33 @@ const projects = [
     features: ['Secure Login UI with Validation', 'Fully Responsive Interface', 'Interactive Data Charts: , Responsive Dashboard: , Real-Time Sync with Supabase, User-Friendly Transaction Management, Budgeting Tools, Expense Categorization, Financial Insights and Trends'],
     demo: 'https://personal-finance-visualizer-ochre-psi.vercel.app/',
   },
+
+{
+    id: 'p3',
+    img: '/project1.png',
+    fallback: 'https://via.placeholder.com/400x250?text=Core+Dynamics',
+    title: 'Modern E-Commerce UI',
+    subtitle: 'Full Responsive E-Commerce Website',
+    detailTitle: 'E-Commerce Website',
+    tech: 'HTML • CSS • JavaScript • API',
+    desc: 'A modern and responsive e-commerce front-end built with a clean product layout, smooth UI elements, and a professional shopping experience. Designed with a focus on performance, usability, and real-world online store structure.',
+    features: ['Product Grid & Category Layout', 'Responsive UI (Tailwind CSS)', 'Clean Front-End Architecture'],
+    demo: 'https://umar2334.github.io/project-1-umar-store/',
+  },
+
+{
+    id: 'p4',
+    img: 'pic123.jpeg',
+    fallback: 'https://via.placeholder.com/400x250?text=WP+Themes',
+    title: 'Society Management app',
+    subtitle: 'Society Management app (flutter  / dart / firebase)',
+    detailTitle: 'Society Management app',
+    tech: 'FLUTTER • DART • FIREBASE .API',
+    desc: 'Designed and developed a fully responsive Society Management app with a clean login interface and a structured layout for residents and administrators. This project demonstrates strong front-end architecture, UI/UX design clarity, and real-world functionality for community & housing management.',
+    features: ['Secure Login UI with Validation', 'Fully Responsive Interface', 'Real-World Society / Housing Portal Design'],
+    demo: 'https://umar2334.github.io/society-managment-portal/',
+  },
+
 
 ];
 
