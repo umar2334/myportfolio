@@ -29,7 +29,7 @@ function LoadingScreen({ onComplete }) {
 
 /* ── Phone Mockup ── */
 function PhoneMockup() {
-  const slides = ['/apnacv.png', '/finance.png', '/project1.png'];
+  const slides = ['/p1.jpeg', '/p2.jpeg', '/p3.jpeg'];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ function PhoneMockup() {
               style={{
                 position: 'absolute', top: 0, left: 0,
                 width: '100%', height: '100%',
-                objectFit: 'cover', objectPosition: 'top left',
+                objectFit: 'cover', objectPosition: 'top center',
                 opacity: i === current ? 1 : 0,
                 transition: 'opacity 0.8s ease',
               }}
