@@ -399,71 +399,24 @@ export default function App() {
           {/* ── Contact ── */}
           <ContactTab />
 
-          {/* ── Google Meet CTA ── */}
-          <div style={{
-            background: '#FAFAF9', padding: '80px 60px',
-            borderTop: '1px solid #ebebeb', textAlign: 'center',
-          }}>
-            <p style={{ color: '#888', fontSize: '13px', fontFamily: "'Plus Jakarta Sans', sans-serif", marginBottom: '12px', letterSpacing: '0.06em' }}>
-              Prefer a quick call?
-            </p>
-            <h3 style={{
-              fontFamily: "'Cabinet Grotesk', sans-serif",
-              fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 800,
-              color: '#111', marginBottom: '28px', letterSpacing: '-0.02em',
-            }}>
-              Book a free 15-min call
-            </h3>
-            <a
-              href="https://meet.google.com/new"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '12px',
-                background: '#111', color: 'white',
-                padding: '16px 36px', borderRadius: '999px',
-                textDecoration: 'none', fontSize: '15px', fontWeight: 700,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                transition: 'background 0.2s',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#333'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#111'; }}
-            >
-              {/* Google Meet color icon */}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M21 8.5L17 12l4 3.5V8.5z" fill="#00BFA5"/>
-                <rect x="3" y="7" width="14" height="10" rx="2" fill="#4CAF50"/>
-                <path d="M21 8.5L17 12l4 3.5V8.5z" fill="#00897B"/>
-              </svg>
-              Start Google Meet
-              <span style={{
-                width: '24px', height: '24px', borderRadius: '50%',
-                background: 'rgba(255,255,255,0.15)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px',
-              }}>↗</span>
-            </a>
-            <p style={{ marginTop: '16px', color: '#aaa', fontSize: '12px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              Quick, focused, no delays
-            </p>
-          </div>
-
           {/* ── Footer ── */}
           <footer style={{ background: '#f4f4f2', borderTop: '1px solid #e0e0e0', padding: '24px 48px' }}>
             <div className="footer-inner" style={{ maxWidth: '1040px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-              {/* Email left */}
-              <a href="mailto:umarkhn895@gmail.com"
+              {/* Instagram left */}
+              <a href="https://www.instagram.com/umarkhan404/"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   display: 'flex', alignItems: 'center', gap: '8px',
                   color: '#666', textDecoration: 'none', fontSize: '13px',
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#111'; }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#E1306C'; }}
                 onMouseLeave={e => { e.currentTarget.style.color = '#666'; }}
               >
-                <i className="fas fa-paper-plane" style={{ fontSize: '12px' }}></i>
-                umarkhn895@gmail.com
+                <i className="fab fa-instagram" style={{ fontSize: '14px' }}></i>
+                Instagram
               </a>
 
               {/* Social icons right */}
@@ -471,6 +424,7 @@ export default function App() {
                 {[
                   { href: 'https://github.com/umar2334', icon: 'fab fa-github', bg: '#1f2937', color: 'white' },
                   { href: 'https://www.linkedin.com/in/umar-khan-094059203/', icon: 'fab fa-linkedin-in', bg: '#0a66c2', color: 'white' },
+                  { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram', bg: '#E1306C', color: 'white' },
                 ].map((s, i) => (
                   <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
                     style={{
