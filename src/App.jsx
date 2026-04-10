@@ -101,9 +101,9 @@ function PhoneMockup() {
             <img
               key={i} src={src} alt=""
               style={{
-                position: 'absolute', top: '44px', left: 0, right: 0,
-                width: '100%', height: 'calc(100% - 44px)',
-                objectFit: 'cover', objectPosition: 'top center',
+                position: 'absolute', top: 0, left: 0,
+                width: '100%', height: '100%',
+                objectFit: 'cover', objectPosition: 'top left',
                 opacity: i === current ? 1 : 0,
                 transition: 'opacity 0.8s ease',
               }}
@@ -423,7 +423,7 @@ export default function App() {
               <div style={{ display: 'flex', gap: '8px' }}>
                 {[
                   { href: 'https://github.com/umar2334', icon: 'fab fa-github', bg: '#1f2937', color: 'white' },
-                  { href: 'https://www.linkedin.com/in/umar-khan-094059203/', icon: 'fab fa-linkedin-in', bg: '#0a66c2', color: 'white' },
+                  { href: 'https://www.linkedin.com/in/muhammad-umar-khan-khan/', icon: 'fab fa-linkedin-in', bg: '#0a66c2', color: 'white' },
                   { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram', bg: '#E1306C', color: 'white' },
                 ].map((s, i) => (
                   <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
