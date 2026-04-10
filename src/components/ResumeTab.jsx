@@ -7,6 +7,7 @@ const devSkills = [
   { label: 'WordPress', pct: 95 },
   { label: 'Firebase', pct: 80 },
   { label: 'Supabase', pct: 85 },
+  { label: 'Flutter', pct: 75 },
 ];
 
 const designSkills = [
