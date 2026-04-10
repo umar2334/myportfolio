@@ -99,7 +99,7 @@ export default function ContactTab() {
               }}>↗</span>
             </button>
             <a
-              href="https://www.linkedin.com/in/umar-khan-094059203/"
+              href="https://www.linkedin.com/in/muhammad-umar-khan-khan/"
               target="_blank"
               rel="noopener noreferrer"
               style={{

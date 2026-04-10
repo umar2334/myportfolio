@@ -1,9 +1,9 @@
 import React from 'react';
 
 const socials = [
-  { href: 'https://github.com/umar2334', icon: 'fab fa-github' },
-  { href: 'https://www.linkedin.com/in/umar-khan-094059203/', icon: 'fab fa-linkedin-in' },
-  { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram' },
+  { href: 'https://github.com/umar2334', icon: 'fab fa-github', bg: '#1f2937', hover: '#111' },
+  { href: 'https://www.linkedin.com/in/muhammad-umar-khan-khan/', icon: 'fab fa-linkedin-in', bg: '#0a66c2', hover: '#0852a0' },
+  { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram', bg: '#E1306C', hover: '#c0254f' },
 ];
 
 export default function AboutSection() {
@@ -84,15 +84,15 @@ export default function AboutSection() {
                     key={i} href={s.href} target="_blank" rel="noopener noreferrer"
                     style={{
                       width: '38px', height: '38px', borderRadius: '50%',
-                      background: 'rgba(0,0,0,0.72)', color: 'white',
+                      background: s.bg, color: 'white',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontSize: '14px', textDecoration: 'none',
-                      backdropFilter: 'blur(8px)',
                       border: '1px solid rgba(255,255,255,0.12)',
-                      transition: 'background 0.2s',
+                      transition: 'background 0.2s, transform 0.2s',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.95)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.72)'; }}
+                    onMouseEnter={e => { e.currentTarget.style.background = s.hover; e.currentTarget.style.transform = 'scale(1.1)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = s.bg; e.currentTarget.style.transform = 'scale(1)'; }}
                   >
                     <i className={s.icon}></i>
                   </a>
