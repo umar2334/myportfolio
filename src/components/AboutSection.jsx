@@ -3,7 +3,7 @@ import React from 'react';
 const socials = [
   { href: 'https://github.com/umar2334', icon: 'fab fa-github' },
   { href: 'https://www.linkedin.com/in/umar-khan-094059203/', icon: 'fab fa-linkedin-in' },
-  { href: 'https://mail.google.com/mail/?view=cm&fs=1&to=umarkhn895@gmail.com', icon: 'fas fa-envelope' },
+  { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram' },
 ];
 
 export default function AboutSection() {
