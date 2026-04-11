@@ -98,6 +98,31 @@ const projects = [
     desc: 'Flutter travel app for exploring Pakistan — featuring real interactive maps, offline route download, turn-by-turn directions, and live weather for mountains, valleys & trails.',
     features: ['Interactive Maps', 'Offline Download', 'Turn-by-Turn Directions', 'Live Weather'],
   },
+  {
+    id: 'p5',
+    icon: 'fas fa-building',
+    iconBg: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+    title: 'Society Management',
+    subtitle: 'Resident & Admin Portal — Karim Nagar Colony.',
+    tech: 'Flutter · Dart · Firebase',
+    badges: [
+      { label: 'FLUTTER', color: '#06b6d4' },
+      { label: 'ANDROID', color: '#22c55e' },
+      { label: 'APK', color: '#3b82f6' },
+    ],
+    stats: [
+      { value: 'v1.0.27', label: 'Version' },
+      { value: '34 MB', label: 'APK Size' },
+      { value: 'Live', label: 'Release' },
+    ],
+    btnColor: '#3b82f6',
+    demo: 'https://github.com/umar2334/society-managment-app/releases/download/v1.0.27/society-management-v1.0.27.apk',
+    github: 'https://github.com/umar2334/society-managment-app',
+    isDownload: true,
+    img: '/main.png',
+    desc: 'Android app for managing society residents and admin operations for Karim Nagar Colony. Features secure login, resident portal, admin dashboard, and society announcements.',
+    features: ['Resident & Admin Login', 'Society Announcements', 'Admin Dashboard', 'APK v1.0.27 Live'],
+  },
 ];
 
 function ProjectCard({ p, onOpen }) {
