@@ -75,27 +75,28 @@ const projects = [
   },
   {
     id: 'p4',
-    icon: 'fas fa-mobile-alt',
-    iconBg: 'linear-gradient(135deg, #f59e0b, #d97706)',
-    title: 'Mobile App',
-    subtitle: 'Android Application — native mobile experience.',
-    tech: 'React Native · Expo',
+    icon: 'fas fa-mountain',
+    iconBg: 'linear-gradient(135deg, #f59e0b, #92400e)',
+    title: 'Ghumo',
+    subtitle: 'Pakistan Travel Explorer — maps, trails & expeditions.',
+    tech: 'Flutter · Dart · Google Maps',
     badges: [
-      { label: 'REACT NATIVE', color: '#06b6d4' },
+      { label: 'FLUTTER', color: '#06b6d4' },
       { label: 'ANDROID', color: '#22c55e' },
-      { label: 'EXPO', color: '#8b5cf6' },
+      { label: 'APK', color: '#f59e0b' },
     ],
     stats: [
-      { value: 'Smooth', label: 'Navigation' },
-      { value: 'Native', label: 'Feel' },
+      { value: 'Live', label: 'Weather' },
+      { value: 'Maps', label: 'Interactive' },
       { value: 'APK', label: 'Ready' },
     ],
     btnColor: '#f59e0b',
-    demo: 'https://drive.google.com/uc?export=download&id=1AEGRuJHlK9MPTrFp2ARfhAmctxoUVkK0',
+    demo: 'https://github.com/umar2334/Ghumo/releases/download/v1.0.0/Ghumo-v1.0.0.apk',
+    github: 'https://github.com/umar2334/Ghumo',
     isDownload: true,
-    img: '/project4.png',
-    desc: 'Specialized mobile application for seamless Android experience showcasing mobile UI patterns and efficient data handling.',
-    features: ['Optimized for Android', 'Smooth Navigation', 'Native Performance'],
+    img: '/ghumo.png',
+    desc: 'Flutter travel app for exploring Pakistan — featuring real interactive maps, offline route download, turn-by-turn directions, and live weather for mountains, valleys & trails.',
+    features: ['Interactive Maps', 'Offline Download', 'Turn-by-Turn Directions', 'Live Weather'],
   },
 ];
 
@@ -306,17 +307,32 @@ export default function PortfolioTab() {
                   </li>
                 ))}
               </ul>
-              <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: project.btnColor, color: 'white', padding: '13px',
-                  borderRadius: '10px', fontWeight: 700, textDecoration: 'none',
-                  fontSize: '14px', fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  boxSizing: 'border-box',
-                }}
-              >
-                {project.isDownload ? 'Download APK ↓' : 'View Live Demo →'}
-              </a>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                  style={{
+                    flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: project.btnColor, color: 'white', padding: '13px',
+                    borderRadius: '10px', fontWeight: 700, textDecoration: 'none',
+                    fontSize: '14px', fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  {project.isDownload ? 'Download APK ↓' : 'View Live Demo →'}
+                </a>
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer"
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                      background: '#2a2a2a', color: '#ccc', padding: '13px 18px',
+                      borderRadius: '10px', fontWeight: 700, textDecoration: 'none',
+                      fontSize: '14px', fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      border: '1px solid #333', boxSizing: 'border-box',
+                    }}
+                  >
+                    <i className="fab fa-github"></i> GitHub
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>
