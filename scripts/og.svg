@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#1f1f1f" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Top-left brand pill -->
+  <g transform="translate(64, 64)">
+    <rect width="172" height="44" rx="22" fill="#ffffff"/>
+    <circle cx="22" cy="22" r="11" fill="#111"/>
+    <text x="40" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-size="18" font-weight="800" fill="#111">Umar.</text>
+    <line x1="98" y1="14" x2="98" y2="30" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="110" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-size="13" fill="#444" font-weight="500">Portfolio</text>
+  </g>
+
+  <!-- Available pill (top right) -->
+  <g transform="translate(960, 64)">
+    <rect width="176" height="44" rx="22" fill="#0f0f0f" stroke="#222" stroke-width="1"/>
+    <circle cx="22" cy="22" r="5" fill="#22c55e"/>
+    <text x="38" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-size="13" fill="#bbb" font-weight="500">Open to roles</text>
+  </g>
+
+  <!-- Main headline -->
+  <g transform="translate(64, 220)">
+    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-size="92" font-weight="800" letter-spacing="-3" fill="#ffffff">
+      <tspan x="0" y="0">I ship </tspan><tspan fill="#666" font-style="italic">production</tspan>
+    </text>
+    <text x="0" y="100" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-size="92" font-weight="800" letter-spacing="-3" fill="#ffffff">web apps.</text>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="64" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-size="22" fill="#999" font-weight="400">
+    Muhammad Umar · AI-native software engineer · Karachi, Pakistan
+  </text>
+
+  <!-- Stack pills -->
+  <g transform="translate(64, 500)" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="500">
+    <g>
+      <rect width="92" height="40" rx="20" fill="#111" stroke="#2a2a2a"/>
+      <text x="46" y="25" fill="#e8e8e8" text-anchor="middle">Next.js</text>
+    </g>
+    <g transform="translate(104, 0)">
+      <rect width="78" height="40" rx="20" fill="#111" stroke="#2a2a2a"/>
+      <text x="39" y="25" fill="#e8e8e8" text-anchor="middle">React</text>
+    </g>
+    <g transform="translate(194, 0)">
+      <rect width="86" height="40" rx="20" fill="#111" stroke="#2a2a2a"/>
+      <text x="43" y="25" fill="#e8e8e8" text-anchor="middle">Flutter</text>
+    </g>
+    <g transform="translate(292, 0)">
+      <rect width="160" height="40" rx="20" fill="#111" stroke="#2a2a2a"/>
+      <text x="80" y="25" fill="#e8e8e8" text-anchor="middle">Claude · Cursor</text>
+    </g>
+    <g transform="translate(464, 0)">
+      <rect width="106" height="40" rx="20" fill="#111" stroke="#2a2a2a"/>
+      <text x="53" y="25" fill="#e8e8e8" text-anchor="middle">Supabase</text>
+    </g>
+  </g>
+
+  <!-- URL bottom right -->
+  <text x="1136" y="586" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14" fill="#555" text-anchor="end">muhammadumar18.vercel.app</text>
+</svg>
