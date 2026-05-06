@@ -5,6 +5,8 @@ import ContactTab from './components/ContactTab';
 import AboutSection from './components/AboutSection';
 import ProcessSection from './components/ProcessSection';
 import FAQSection from './components/FAQSection';
+import NowSection from './components/NowSection';
+import StatsStrip from './components/StatsStrip';
 
 /* ── Loading Screen ── */
 function LoadingScreen({ onComplete }) {
@@ -278,11 +280,9 @@ export default function App() {
 
               {/* Nav links — collapse on scroll */}
               <div className={`nav-links-group${scrolled ? ' collapsed' : ''}`}>
-                {['about', 'projects', 'skills'].map(id => (
-                  <button key={id} className="nav-link" onClick={() => scrollTo(id)}>
-                    {id.charAt(0).toUpperCase() + id.slice(1)}
-                  </button>
-                ))}
+                <button className="nav-link" onClick={() => scrollTo('about')}>About</button>
+                <button className="nav-link" onClick={() => scrollTo('projects')}>Work</button>
+                <button className="nav-link" onClick={() => scrollTo('skills')}>Stack</button>
                 <button className="nav-contact-btn" onClick={() => scrollTo('contact')}>
                   Contact
                 </button>
@@ -399,8 +399,14 @@ export default function App() {
             </div>
           </section>
 
+          {/* ── Now / Currently shipping (build-in-public) ── */}
+          <NowSection />
+
           {/* ── About ── */}
           <AboutSection />
+
+          {/* ── Stats Strip ── */}
+          <StatsStrip />
 
           {/* ── Projects ── */}
           <PortfolioTab />
@@ -418,36 +424,38 @@ export default function App() {
           <ContactTab />
 
           {/* ── Footer ── */}
-          <footer style={{ background: '#f4f4f2', borderTop: '1px solid #e0e0e0', padding: '24px 48px' }}>
+          <footer style={{ background: '#f4f4f2', borderTop: '1px solid #e0e0e0', padding: '32px 48px' }}>
             <div className="footer-inner" style={{ maxWidth: '1040px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-              {/* Instagram left */}
-              <a href="https://www.instagram.com/umarkhan404/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '8px',
-                  color: '#666', textDecoration: 'none', fontSize: '13px',
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#E1306C'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#666'; }}
-              >
-                <i className="fab fa-instagram" style={{ fontSize: '14px' }}></i>
-                Instagram
-              </a>
 
-              {/* Social icons right */}
+              {/* Left — name + location */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <p style={{
+                  fontFamily: "'Cabinet Grotesk', sans-serif", fontWeight: 800,
+                  fontSize: '14px', color: '#111',
+                }}>
+                  Muhammad Umar
+                </p>
+                <p style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: '12px', color: '#777',
+                }}>
+                  Built in Karachi, Pakistan 🇵🇰  ·  © 2026
+                </p>
+              </div>
+
+              {/* Right — social icons */}
               <div style={{ display: 'flex', gap: '8px' }}>
                 {[
-                  { href: 'https://github.com/umar2334', icon: 'fab fa-github', bg: '#1f2937', color: 'white' },
-                  { href: 'https://www.linkedin.com/in/muhammad-umar-khan-khan/', icon: 'fab fa-linkedin-in', bg: '#0a66c2', color: 'white' },
-                  { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram', bg: '#E1306C', color: 'white' },
+                  { href: 'https://github.com/umar2334', icon: 'fab fa-github', bg: '#1f2937', label: 'GitHub' },
+                  { href: 'https://www.linkedin.com/in/muhammad-umar-khan-khan/', icon: 'fab fa-linkedin-in', bg: '#0a66c2', label: 'LinkedIn' },
+                  { href: 'https://twitter.com/umarkhn895', icon: 'fab fa-x-twitter', bg: '#000', label: 'X / Twitter' },
+                  { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram', bg: '#E1306C', label: 'Instagram' },
+                  { href: 'mailto:umarkhn895@gmail.com', icon: 'fas fa-envelope', bg: '#444', label: 'Email' },
                 ].map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}
                     style={{
                       width: '36px', height: '36px', borderRadius: '10px',
-                      background: s.bg, color: s.color,
+                      background: s.bg, color: 'white',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       textDecoration: 'none', fontSize: '14px',
                       transition: 'opacity 0.2s',

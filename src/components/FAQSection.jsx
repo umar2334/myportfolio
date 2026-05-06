@@ -2,24 +2,32 @@ import React, { useState } from 'react';
 
 const faqs = [
   {
-    q: 'How long does a typical project take?',
-    a: 'It depends on scope and complexity. A simple landing page takes 1–2 weeks. A full web app with auth, database and dashboards typically takes 4–8 weeks. After understanding your goals, I give a clear timeline upfront.',
+    q: 'How fast can you actually ship?',
+    a: 'Landing page: 3–7 days. Production MVP with auth + database: 2–3 weeks. Full mobile app: 3–4 weeks. AI-augmented workflow (Claude + Cursor as daily drivers) cuts the timeline roughly in half compared to traditional dev. You get a fixed quote and a timeline upfront — and daily Loom updates so you see progress, not promises.',
   },
   {
-    q: 'What technologies do you work with?',
-    a: 'React, Next.js, Tailwind CSS, Node.js, Firebase, Supabase, and WordPress. For mobile I use React Native and Flutter. I pick the right tool for the job — not just what\'s trending.',
+    q: 'You use AI to write code — does that mean you don\'t actually understand it?',
+    a: 'Fair question. I read every line, refactor what the AI gets wrong, and own every shipped commit. AI is a faster keyboard, not a substitute for engineering. I architect, debug, optimize, and review — and yes, I can whiteboard the solution without it. Treat me like a senior dev with a very fast assistant.',
+  },
+  {
+    q: 'What\'s your stack?',
+    a: 'Frontend: Next.js, React, TypeScript, Tailwind. Backend: Node, Supabase, Firebase, Postgres. Mobile: Flutter. AI: OpenAI, Anthropic, Gemini APIs. Tools: Vercel, GitHub, Figma. I pick what fits the problem — not what is trendy.',
   },
   {
     q: 'Do you work with international clients?',
-    a: 'Yes, absolutely. I work with clients remotely across different time zones. Communication is async-friendly with regular updates via email or WhatsApp.',
+    a: 'Yes. Async-first, timezone-friendly. I overlap with US/EU mornings and respond within a few hours. Karachi is GMT+5. Payments via Wise, Payoneer, or direct bank.',
   },
   {
-    q: 'Do you provide support after launch?',
-    a: 'Yes. I offer post-launch support for bug fixes and small updates. For ongoing maintenance, we can discuss a monthly retainer depending on the project.',
+    q: 'Can you join an existing codebase?',
+    a: 'Yes. I jump into existing React, Next, Flutter, or Node projects, do a code-walk, and continue from where the previous dev left off. I document what I touch and ship clean PRs — no cowboy commits.',
   },
   {
-    q: 'Can you work with an existing codebase?',
-    a: 'Yes. I can jump into an existing React or Node project, review the code, and continue development or fix issues. I\'m comfortable reading and extending other people\'s code.',
+    q: 'What about post-launch support?',
+    a: 'Free fixes for 14 days after handoff. Beyond that, ongoing support is monthly retainer or hourly — your choice. Source code, deployment access, and docs are always yours. No lock-in.',
+  },
+  {
+    q: 'Are you open to full-time roles?',
+    a: 'Yes — actively. I am open to remote-first software engineering roles globally and on-site in Pakistan. Send me a JD and I\'ll get back to you the same day.',
   },
 ];
 
