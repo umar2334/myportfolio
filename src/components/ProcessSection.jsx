@@ -3,24 +3,24 @@ import React from 'react';
 const steps = [
   {
     num: '01',
-    icon: 'fas fa-search',
-    title: 'Discover & Define',
-    desc: 'I understand your vision, map out requirements, and define what "done" actually looks like — before writing a single line of code.',
-    tags: ['Requirements', 'Research', 'Timeline'],
+    icon: 'fas fa-comments',
+    title: '15-min call',
+    desc: 'WhatsApp or Google Meet. You explain what you need. I tell you what is realistic, what it costs, and how long it takes — no sales pitch.',
+    tags: ['Scope', 'Timeline', 'Quote'],
   },
   {
     num: '02',
-    icon: 'fas fa-pencil-ruler',
-    title: 'Design & Build',
-    desc: 'You see real screens before development locks in. UI is designed for clarity first, then built with clean, scalable code.',
-    tags: ['UI/UX Design', 'React', 'Prototyping'],
+    icon: 'fas fa-bolt',
+    title: 'Build in public',
+    desc: 'Daily Loom updates. You see screens before code is written, code before it is deployed. AI-augmented workflow keeps weeks from turning into months.',
+    tags: ['Figma', 'Daily Looms', 'Live preview'],
   },
   {
     num: '03',
     icon: 'fas fa-rocket',
-    title: 'Test & Ship',
-    desc: 'Thoroughly tested across devices, optimized for performance, and deployed live with everything working end-to-end.',
-    tags: ['QA Testing', 'Deployment', 'Clean code'],
+    title: 'Ship & support',
+    desc: 'Tested, deployed, documented. You get the source code, deployment access, and 14 days of free fixes. No lock-in, no surprises.',
+    tags: ['Deploy', 'Handoff', '14-day fixes'],
   },
 ];
 
@@ -37,14 +37,14 @@ export default function ProcessSection() {
             color: '#111', lineHeight: 1.1, letterSpacing: '-0.02em',
             marginBottom: '16px',
           }}>
-            From brief to launch in weeks,<br />
-            <span style={{ color: '#111' }}>Not months.</span>
+            How I work with clients.<br />
+            <span style={{ color: '#bbb' }}>No agency theatre.</span>
           </h2>
           <p style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontSize: '16px', color: '#888',
           }}>
-            Three focused phases. No fluff, no delays.
+            One engineer. Daily updates. Live preview from day two.
           </p>
         </div>
 

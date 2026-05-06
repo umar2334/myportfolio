@@ -312,62 +312,80 @@ export default function App() {
                   }}>
                     <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
                     <span style={{ fontSize: '13px', color: '#444', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                      Available for Inquiries
+                      Open to roles & freelance
                     </span>
                   </div>
 
-                  {/* Title — "I enjoy creating / *web* apps." */}
+                  {/* Title — sharper positioning */}
                   <h1 className="hero-title" style={{
                     fontFamily: "'Cabinet Grotesk', sans-serif",
                     fontWeight: 800, lineHeight: 1.05,
                     letterSpacing: '-0.03em', marginBottom: '24px',
                     fontSize: 'clamp(42px, 6vw, 72px)',
                   }}>
-                    <span style={{ display: 'block', color: '#111' }}>I enjoy creating</span>
+                    <span style={{ display: 'block', color: '#111' }}>I ship </span>
                     <span style={{ display: 'block' }}>
-                      <em style={{ color: '#b0b0b0', fontStyle: 'italic', fontWeight: 800 }}>web</em>
-                      <span style={{ color: '#111' }}> apps.</span>
+                      <em style={{ color: '#b0b0b0', fontStyle: 'italic', fontWeight: 800 }}>production</em>
+                      <span style={{ color: '#111' }}> web apps.</span>
                     </span>
                   </h1>
 
-                  {/* PERHAPS TODAY label */}
+                  {/* Stack tag */}
                   <p style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em',
                     color: '#888', textTransform: 'uppercase',
-                    marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '6px',
+                    marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px',
                   }}>
-                    Perhaps today <span style={{ fontSize: '14px' }}>📍</span>
+                    React · Next.js · Flutter · AI-native
                   </p>
 
                   <p style={{
                     color: '#555', fontSize: '15px', lineHeight: 1.75,
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    maxWidth: '400px', marginBottom: '36px',
+                    maxWidth: '440px', marginBottom: '36px',
                   }}>
-                    I'm <strong style={{ color: '#111' }}>Umar</strong> a Software Engineer building modern web experiences.
+                    I'm <strong style={{ color: '#111' }}>Umar</strong> — a software engineer who builds production-ready web and mobile apps using AI as a co-pilot. Solo, fast, and shipping every week.
                   </p>
 
-                  <button
-                    onClick={() => scrollTo('projects')}
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', gap: '12px',
-                      background: '#111', color: 'white', border: 'none',
-                      padding: '16px 28px', borderRadius: '999px',
-                      fontSize: '15px', fontWeight: 700, cursor: 'pointer',
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      transition: 'background 0.2s',
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = '#333'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = '#111'; }}
-                  >
-                    View Projects
-                    <span style={{
-                      width: '26px', height: '26px', borderRadius: '50%',
-                      background: 'rgba(255,255,255,0.15)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px',
-                    }}>↗</span>
-                  </button>
+                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                    <button
+                      onClick={() => scrollTo('projects')}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '12px',
+                        background: '#111', color: 'white', border: 'none',
+                        padding: '16px 28px', borderRadius: '999px',
+                        fontSize: '15px', fontWeight: 700, cursor: 'pointer',
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        transition: 'background 0.2s',
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.background = '#333'; }}
+                      onMouseLeave={e => { e.currentTarget.style.background = '#111'; }}
+                    >
+                      See my work
+                      <span style={{
+                        width: '26px', height: '26px', borderRadius: '50%',
+                        background: 'rgba(255,255,255,0.15)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px',
+                      }}>↗</span>
+                    </button>
+                    <button
+                      onClick={() => scrollTo('contact')}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '10px',
+                        background: 'transparent', color: '#111',
+                        padding: '16px 24px', borderRadius: '999px',
+                        border: '1px solid #d0d0d0', cursor: 'pointer',
+                        fontSize: '15px', fontWeight: 600,
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        transition: 'background 0.2s',
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.background = '#f0f0f0'; }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+                    >
+                      Get in touch
+                    </button>
+                  </div>
                 </div>
 
                 {/* Right — phone mockup, slightly tilted */}

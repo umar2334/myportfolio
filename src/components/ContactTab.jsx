@@ -56,8 +56,8 @@ export default function ContactTab() {
             fontSize: 'clamp(32px, 5vw, 50px)', fontWeight: 800,
             lineHeight: 1.1, marginBottom: '20px',
           }}>
-            <span style={{ color: '#111' }}>Got a project idea?</span><br />
-            <span style={{ color: '#bbb' }}>Let's make it real.</span>
+            <span style={{ color: '#111' }}>Tell me what you're building.</span><br />
+            <span style={{ color: '#bbb' }}>I'll reply in 24 hours.</span>
           </h2>
 
           <p style={{
@@ -65,38 +65,61 @@ export default function ContactTab() {
             fontSize: '15px', color: '#666', lineHeight: 1.75,
             maxWidth: '500px', marginBottom: '40px',
           }}>
-            From first concept to final deployment — I help turn your ideas into
-            polished web applications. Let's talk about your project.
+            Hiring for a role, scoping a freelance project, or just want a second opinion on an idea — drop me a line. I read everything.
           </p>
 
           {/* CTA buttons */}
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '20px' }}>
-            <button
-              onClick={() => setShowBooking(true)}
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '24px' }}>
+            <a
+              href="https://wa.me/923000000000?text=Hi%20Umar%2C%20I%20saw%20your%20portfolio."
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '10px',
+                background: '#25D366', color: 'white',
+                padding: '14px 26px', borderRadius: '999px',
+                textDecoration: 'none', fontSize: '15px', fontWeight: 700,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#1ebd5c'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#25D366'; }}
+            >
+              <i className="fab fa-whatsapp" style={{ fontSize: '16px' }}></i>
+              WhatsApp
+            </a>
+            <a
+              href="mailto:umarkhn895@gmail.com?subject=Project%20inquiry"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '10px',
                 background: '#111', color: 'white',
-                padding: '14px 28px', borderRadius: '999px',
-                border: 'none', cursor: 'pointer',
-                fontSize: '15px', fontWeight: 700,
+                padding: '14px 26px', borderRadius: '999px',
+                textDecoration: 'none', fontSize: '15px', fontWeight: 700,
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 transition: 'background 0.2s',
               }}
               onMouseEnter={e => { e.currentTarget.style.background = '#333'; }}
               onMouseLeave={e => { e.currentTarget.style.background = '#111'; }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                <path d="M21 8.5L17 12l4 3.5V8.5z" fill="#00BFA5"/>
-                <rect x="3" y="7" width="14" height="10" rx="2" fill="#4CAF50"/>
-                <path d="M21 8.5L17 12l4 3.5V8.5z" fill="#00897B"/>
-              </svg>
-              Start Google Meet
-              <span style={{
-                width: '22px', height: '22px', borderRadius: '50%',
-                background: 'rgba(255,255,255,0.15)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '11px',
-              }}>↗</span>
+              <i className="fas fa-envelope" style={{ fontSize: '14px' }}></i>
+              Email
+            </a>
+            <button
+              onClick={() => setShowBooking(true)}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '10px',
+                background: 'transparent', color: '#111',
+                padding: '14px 26px', borderRadius: '999px',
+                border: '1px solid #d0d0d0', cursor: 'pointer',
+                fontSize: '15px', fontWeight: 600,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#f0f0f0'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+            >
+              <i className="fas fa-video" style={{ fontSize: '13px' }}></i>
+              Book a 15-min call
             </button>
             <a
               href="https://www.linkedin.com/in/muhammad-umar-khan-khan/"
@@ -104,17 +127,18 @@ export default function ContactTab() {
               rel="noopener noreferrer"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '10px',
-                background: '#0a66c2', color: 'white',
-                padding: '14px 28px', borderRadius: '999px',
-                textDecoration: 'none', fontSize: '15px', fontWeight: 700,
+                background: 'transparent', color: '#0a66c2',
+                padding: '14px 26px', borderRadius: '999px',
+                textDecoration: 'none', fontSize: '15px', fontWeight: 600,
+                border: '1px solid #cfdcec',
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 transition: 'background 0.2s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#0852a0'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#0a66c2'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#f0f6fc'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
               <i className="fab fa-linkedin-in" style={{ fontSize: '14px' }}></i>
-              Connect on LinkedIn
+              LinkedIn
             </a>
           </div>
 
@@ -124,7 +148,7 @@ export default function ContactTab() {
             display: 'flex', alignItems: 'center', gap: '6px',
           }}>
             <i className="fas fa-clock" style={{ fontSize: '11px' }}></i>
-            Quick response — usually within 24 hours
+            Based in Karachi · Replies within 24 hours
           </p>
         </div>
 

@@ -14,10 +14,10 @@ export default function AboutSection() {
         {/* Two-tone heading */}
         <h2 style={{ fontFamily: "'Cabinet Grotesk', sans-serif", lineHeight: 1.15, marginBottom: '72px' }}>
           <span style={{ display: 'block', fontSize: 'clamp(28px, 4vw, 50px)', fontWeight: 800, color: '#bbb' }}>
-            A full-stack engineer's approach
+            Built like a senior.
           </span>
           <span style={{ display: 'block', fontSize: 'clamp(28px, 4vw, 50px)', fontWeight: 800, color: '#111' }}>
-            to building great web apps.
+            Shipping like a startup.
           </span>
         </h2>
 
@@ -38,7 +38,7 @@ export default function AboutSection() {
               boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
               whiteSpace: 'nowrap',
             }}>
-              Pixel-Perfect Dev
+              Karachi · Pakistan
             </div>
 
             {/* Offset shadow layer — like the screenshot */}
@@ -118,30 +118,26 @@ export default function AboutSection() {
               fontSize: '17px', lineHeight: 1.75, color: '#111',
               fontWeight: 600, marginBottom: '24px',
             }}>
-              I wrote my first line of code over 4 years ago — and never looked back.
+              I'm an AI-native software engineer. I started coding 4 years ago — right when LLMs began rewriting how software is built.
             </p>
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: '15px', lineHeight: 1.8, color: '#555', marginBottom: '24px',
             }}>
-              What started as curiosity turned into a craft. I build modern web applications
-              using React, Node.js, Firebase, and Supabase — focusing on clean UI and
-              performance that users can actually feel.
+              I work across the full stack — Next.js, React, Flutter, Node, Supabase — and use Claude, Cursor, and GPT as daily tools. The result: I ship working products in days, not months. Ten side projects deployed. Real users on a few of them.
             </p>
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: '16px', lineHeight: 1.75, color: '#111',
               fontWeight: 700, marginBottom: '20px',
             }}>
-              Good code is invisible. Bad code is everywhere.
+              Speed is a skill. Taste is a skill. I'm working on both.
             </p>
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: '15px', lineHeight: 1.8, color: '#555',
             }}>
-              I refine until things simply work — letting the product speak for itself,
-              not the complexity behind it. Currently pursuing BS Software Engineering
-              at Indus University (2026).
+              Open to full-time engineering roles and selective freelance work for founders who need to move fast. BS Software Engineering · Indus University · 2026.
             </p>
           </div>
 

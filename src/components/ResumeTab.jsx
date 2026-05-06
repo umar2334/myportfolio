@@ -1,51 +1,40 @@
 import React from 'react';
 
-const devSkills = [
-  { label: 'React.js / JavaScript', pct: 90 },
-  { label: 'Node.js', pct: 50 },
-  { label: 'HTML5 / Tailwind CSS', pct: 95 },
-  { label: 'WordPress', pct: 95 },
-  { label: 'Firebase', pct: 80 },
-  { label: 'Supabase', pct: 85 },
-  { label: 'Flutter', pct: 75 },
-];
-
-const designSkills = [
-  { label: 'Figma / UI Wireframing', pct: 85 },
-  { label: 'Adobe Photoshop', pct: 90 },
+const skillGroups = [
+  {
+    label: 'AI-augmented dev',
+    items: ['Claude · Cursor · Copilot', 'OpenAI / Gemini / Anthropic APIs', 'Custom GPTs · agents · prompt eng', 'Spec-to-prod in days, not weeks'],
+  },
+  {
+    label: 'Frontend',
+    items: ['React · Next.js (App Router)', 'TypeScript · Tailwind CSS', 'Framer Motion · shadcn/ui', 'Performance & accessibility'],
+  },
+  {
+    label: 'Backend & data',
+    items: ['Node.js · API routes · serverless', 'Supabase · Firebase · Postgres', 'Auth, RLS, realtime, storage', 'REST · webhooks · cron'],
+  },
+  {
+    label: 'Mobile',
+    items: ['Flutter · Dart', 'Cross-platform iOS + Android', 'APK builds, releases', 'Google Maps, native plugins'],
+  },
+  {
+    label: 'Tools & ops',
+    items: ['Git · GitHub · Vercel', 'Figma · UI/UX wireframing', 'WordPress (when needed)', 'Linear-style workflow'],
+  },
 ];
 
 const services = [
-  'Full Stack Development',
-  'Mobile App Development',
-  'BaaS & Cloud Solutions',
-  'Responsive Web Design',
-  'WordPress Development',
-  'WP Plugin & Theme Customization',
+  { label: 'Production MVP — web', note: '1–3 weeks' },
+  { label: 'Production MVP — mobile', note: '2–4 weeks' },
+  { label: 'AI integration / agent', note: 'project-based' },
+  { label: 'Marketing / landing pages', note: '3–7 days' },
+  { label: 'Existing codebase work', note: 'hourly' },
 ];
 
 const education = [
   { degree: 'BS Software Engineering', inst: 'Indus University', year: '2022 – 2026' },
-  { degree: 'Intermediate (CS)', inst: 'Fatimiyah Boys College', year: '2019 – 2021' },
+  { degree: 'Intermediate (Computer Science)', inst: 'Fatimiyah Boys College', year: '2019 – 2021' },
 ];
-
-function SkillBar({ label, pct, dark }) {
-  return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-        <span style={{ color: dark ? '#ccc' : '#333', fontSize: '13px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-          {label}
-        </span>
-        <span style={{ color: dark ? '#666' : '#888', fontSize: '12px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-          {pct}%
-        </span>
-      </div>
-      <div style={{ background: dark ? '#2a2a2a' : '#e8e8e8', height: '2px', borderRadius: '999px' }}>
-        <div style={{ width: `${pct}%`, background: dark ? '#e8e8e8' : '#111', height: '2px', borderRadius: '999px' }} />
-      </div>
-    </div>
-  );
-}
 
 export default function ResumeTab() {
   return (
@@ -55,32 +44,43 @@ export default function ResumeTab() {
         {/* Header */}
         <div style={{ marginBottom: '64px' }}>
           <p style={{ color: '#555', fontSize: '12px', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '12px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            What I do
+            What I work with
           </p>
           <h2 style={{ fontSize: '48px', fontWeight: 800, color: 'white', fontFamily: "'Cabinet Grotesk', sans-serif", letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-            Skills & Services
+            Stack & capabilities
           </h2>
         </div>
 
-        <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px' }}>
+        <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '80px' }}>
 
-          {/* Left: Skills */}
+          {/* Left: Skill groups */}
           <div>
-            <p style={{ color: '#666', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '28px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>
-              Development
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '48px' }}>
-              {devSkills.map((s, i) => <SkillBar key={i} label={s.label} pct={s.pct} dark />)}
-            </div>
+            {skillGroups.map((g, i) => (
+              <div key={i} style={{ marginBottom: '32px' }}>
+                <p style={{
+                  color: '#888', fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase',
+                  marginBottom: '14px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700,
+                }}>
+                  {g.label}
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {g.items.map((item, j) => (
+                    <span key={j} style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: '13px', color: '#e8e8e8',
+                      padding: '8px 14px',
+                      background: '#1c1c1c',
+                      border: '1px solid #2a2a2a',
+                      borderRadius: '999px',
+                    }}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
 
-            <p style={{ color: '#666', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '28px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>
-              Design
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {designSkills.map((s, i) => <SkillBar key={i} label={s.label} pct={s.pct} dark />)}
-            </div>
-
-            <div style={{ marginTop: '48px' }}>
+            <div style={{ marginTop: '40px' }}>
               <a
                 href="/umarcv.pdf"
                 download="Muhammad_Umar_CV.pdf"
@@ -100,29 +100,31 @@ export default function ResumeTab() {
 
           {/* Right: Services + Education */}
           <div>
-            <p style={{ color: '#666', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '28px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>
-              Services
+            <p style={{ color: '#888', fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '20px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
+              Available for
             </p>
             <div style={{ marginBottom: '48px' }}>
               {services.map((svc, i) => (
                 <div key={i} style={{
-                  padding: '16px 0', borderBottom: '1px solid #1e1e1e',
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  padding: '14px 0', borderBottom: '1px solid #1e1e1e',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px',
                 }}>
-                  <span style={{ color: '#ccc', fontSize: '14px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                    {svc}
+                  <span style={{ color: '#e8e8e8', fontSize: '14px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 500 }}>
+                    {svc.label}
                   </span>
-                  <span style={{ color: '#444', fontSize: '18px' }}>→</span>
+                  <span style={{ color: '#666', fontSize: '12px', fontFamily: "'Plus Jakarta Sans', sans-serif", whiteSpace: 'nowrap' }}>
+                    {svc.note}
+                  </span>
                 </div>
               ))}
             </div>
 
-            <p style={{ color: '#666', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '28px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>
+            <p style={{ color: '#888', fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '20px', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
               Education
             </p>
             <div>
               {education.map((edu, i) => (
-                <div key={i} style={{ padding: '16px 0', borderBottom: '1px solid #1e1e1e' }}>
+                <div key={i} style={{ padding: '14px 0', borderBottom: '1px solid #1e1e1e' }}>
                   <p style={{ color: 'white', fontSize: '14px', fontWeight: 600, fontFamily: "'Plus Jakarta Sans', sans-serif", marginBottom: '4px' }}>
                     {edu.degree}
                   </p>
