@@ -3,19 +3,19 @@ import React from 'react';
 const shipping = [
   {
     status: 'shipping',
-    label: 'In progress',
-    title: 'Routely.ai',
-    desc: 'AI cost-optimization gateway — drop-in proxy that routes LLM requests to the cheapest model that meets quality bar.',
-    stack: 'Next.js · Hono · Cloudflare Workers',
-    week: 'Week 1 of build',
+    label: 'In design',
+    title: 'FYPMatch',
+    desc: 'AI-powered FYP idea generator for Pakistani students. JSON-prompted Claude returns 5 ranked, supervisor-approved ideas with tech stack and post-grad monetization.',
+    stack: 'Next.js · Claude API · JSON Prompting',
+    week: 'Designed this week',
   },
   {
     status: 'live',
     label: 'Live',
     title: 'LeadHunter Pro',
-    desc: 'AI lead generation SaaS with Chrome extension. Gemini-powered scraping and dashboard.',
+    desc: 'AI lead generation SaaS with Chrome extension. Gemini-powered scraping, scoring, and outreach generation in one dashboard.',
     stack: 'Next.js · Gemini · Chrome MV3',
-    week: 'Shipped 2 weeks ago',
+    week: 'Shipped recently',
   },
   {
     status: 'live',
@@ -23,7 +23,7 @@ const shipping = [
     title: 'SEO Autopilot',
     desc: 'Auto-distribute content across 6+ platforms with AI rewrites for each. OAuth + scheduled jobs.',
     stack: 'Next.js · OpenAI · OAuth',
-    week: 'Shipped 1 month ago',
+    week: 'Shipped last month',
   },
 ];
 

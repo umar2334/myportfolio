@@ -2,6 +2,31 @@ import React, { useState } from 'react';
 
 const projects = [
   {
+    id: 'p0',
+    icon: 'fas fa-graduation-cap',
+    iconBg: 'linear-gradient(135deg, #18181b, #27272a)',
+    title: 'FYPMatch',
+    subtitle: 'AI Final-Year Project Idea Generator for Pakistani Students.',
+    tech: 'Next.js · Claude API · JSON Prompting',
+    badges: [
+      { label: 'IN DESIGN', color: '#f59e0b' },
+      { label: 'AI', color: '#22c55e' },
+      { label: 'EDTECH', color: '#3b82f6' },
+    ],
+    stats: [
+      { value: '5', label: 'Ranked Ideas' },
+      { value: '30s', label: 'Generation' },
+      { value: 'PK', label: 'Context Aware' },
+    ],
+    btnColor: '#18181b',
+    demo: 'https://www.figma.com/design/6FSLxWC2xUyPP8fyIu9h3S',
+    github: null,
+    isDownload: false,
+    img: '/fypmatch.png',
+    desc: 'AI-powered FYP idea generator built on JSON-prompted Claude API. Students input their major, interests, skills, team size — get 5 ranked ideas with tech stack, MVP features, supervisor pitch, and post-graduation monetization potential. Designed end-to-end in Figma; production build in progress.',
+    features: ['JSON-Prompted Claude API', 'Pakistani Context Aware', '5 Ranked Personalized Ideas', 'Supervisor-Ready Pitch'],
+  },
+  {
     id: 'p1',
     icon: 'fas fa-file-alt',
     iconBg: 'linear-gradient(135deg, #6366f1, #4f46e5)',
