@@ -71,7 +71,7 @@ export default function ContactTab() {
           {/* CTA buttons */}
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '24px' }}>
             <a
-              href="https://wa.me/923000000000?text=Hi%20Umar%2C%20I%20saw%20your%20portfolio."
+              href="https://wa.me/923402288644?text=Hi%20Umar%2C%20I%20saw%20your%20portfolio."
               target="_blank"
               rel="noopener noreferrer"
               style={{
