@@ -1,477 +1,629 @@
-import React, { useState, useEffect } from 'react';
-import PortfolioTab from './components/PortfolioTab';
-import ResumeTab from './components/ResumeTab';
-import ContactTab from './components/ContactTab';
-import AboutSection from './components/AboutSection';
-import ProcessSection from './components/ProcessSection';
-import FAQSection from './components/FAQSection';
-import NowSection from './components/NowSection';
-import StatsStrip from './components/StatsStrip';
+import React, { useEffect, useRef, useState } from 'react';
+import BookingModal from './components/BookingModal';
+import SectionHead from './components/SectionHead';
+import { BlogIndex, BlogPost, NotFound, WritingSection } from './components/Blog';
+import { articles } from './articles';
+import {
+  links, stats, buildingWith, skillGroups, experience, education, featured, pipeline,
+  projects, certifications, steps, services, faqs,
+} from './data';
+import './styles.css';
 
-/* ── Loading Screen ── */
-function LoadingScreen({ onComplete }) {
-  const [count, setCount] = useState(0);
+/* Adds .is-visible to each .reveal element as it scrolls into view. */
+function useReveal() {
   useEffect(() => {
-    if (count >= 100) { const t = setTimeout(onComplete, 400); return () => clearTimeout(t); }
-    const t = setTimeout(() => setCount(c => c + 1), 18);
-    return () => clearTimeout(t);
-  }, [count]);
+    const els = document.querySelectorAll('.reveal');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-visible'));
+      return undefined;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -40px 0px' });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
+/* Orange glow plus a grid of dots that swell and push away from the pointer. */
+const DOT_SPACING = 26;
+const DOT_RADIUS = 190;
+
+function CursorGlow() {
+  const wrapRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    const allowed = window.matchMedia('(pointer: fine)').matches
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!wrap || !ctx || !allowed) return undefined;
+
+    const target = { x: -1000, y: -1000 };
+    const eased = { x: -1000, y: -1000 };
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+
+    const resize = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      const firstCol = Math.max(0, Math.floor((eased.x - DOT_RADIUS) / DOT_SPACING));
+      const lastCol = Math.ceil((eased.x + DOT_RADIUS) / DOT_SPACING);
+      const firstRow = Math.max(0, Math.floor((eased.y - DOT_RADIUS) / DOT_SPACING));
+      const lastRow = Math.ceil((eased.y + DOT_RADIUS) / DOT_SPACING);
+      for (let col = firstCol; col <= lastCol; col += 1) {
+        for (let row = firstRow; row <= lastRow; row += 1) {
+          const baseX = col * DOT_SPACING + DOT_SPACING / 2;
+          const baseY = row * DOT_SPACING + DOT_SPACING / 2;
+          const dx = baseX - eased.x;
+          const dy = baseY - eased.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance <= DOT_RADIUS) {
+            const strength = (1 - distance / DOT_RADIUS) ** 2;
+            const push = (14 * strength) / (distance || 1);
+            ctx.beginPath();
+            ctx.arc(baseX + dx * push, baseY + dy * push, 0.8 + 1.6 * strength, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 150, 70, ${0.12 + 0.7 * strength})`;
+            ctx.fill();
+          }
+        }
+      }
+    };
+
+    const tick = () => {
+      eased.x += (target.x - eased.x) * 0.15;
+      eased.y += (target.y - eased.y) * 0.15;
+      wrap.style.setProperty('--x', `${eased.x}px`);
+      wrap.style.setProperty('--y', `${eased.y}px`);
+      draw();
+      const settled = Math.abs(target.x - eased.x) < 0.1 && Math.abs(target.y - eased.y) < 0.1;
+      frame = settled ? 0 : requestAnimationFrame(tick);
+    };
+
+    const move = (e) => {
+      if (target.x < -500) {
+        eased.x = e.clientX;
+        eased.y = e.clientY;
+      }
+      target.x = e.clientX;
+      target.y = e.clientY;
+      wrap.style.opacity = 1;
+      if (!frame) frame = requestAnimationFrame(tick);
+    };
+    const hide = () => { wrap.style.opacity = 0; };
+
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('pointermove', move, { passive: true });
+    document.documentElement.addEventListener('pointerleave', hide);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('pointermove', move);
+      document.documentElement.removeEventListener('pointerleave', hide);
+    };
+  }, []);
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: '#111111', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
-      <p style={{ color: '#666', fontSize: '13px', letterSpacing: '0.08em', marginBottom: '16px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-        Crafting your experience
-      </p>
-      <p style={{ color: 'white', fontSize: '80px', fontWeight: 800, fontFamily: "'Cabinet Grotesk', sans-serif", lineHeight: 1 }}>
-        {String(count).padStart(2, '0')}%
-      </p>
+    <div ref={wrapRef} className="cursor-glow" aria-hidden="true">
+      <canvas ref={canvasRef} />
     </div>
   );
 }
 
-/* ── Phone Mockup ── */
-function PhoneMockup() {
-  const slides = ['/p1.jpeg', '/p2.jpeg', '/p3.jpeg'];
-  const [current, setCurrent] = useState(0);
-
+/* Returns the id of the section currently under the nav. */
+function useActiveSection(ids) {
+  const [active, setActive] = useState('');
+  const key = ids.join(',');
   useEffect(() => {
-    const t = setInterval(() => setCurrent(c => (c + 1) % slides.length), 2800);
-    return () => clearInterval(t);
-  }, []);
+    const sections = key.split(',').map((id) => document.getElementById(id)).filter(Boolean);
+    if (!sections.length || !('IntersectionObserver' in window)) return undefined;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [key]);
+  return active;
+}
 
+function Nav({ isBlog }) {
+  const [open, setOpen] = useState(false);
+  const items = [
+    ['About', '/#about', 'about'],
+    ['Experience', '/#experience', 'experience'],
+    ['Work', '/#work', 'work'],
+    ...(certifications.length ? [['Certs', '/#certifications', 'certifications']] : []),
+    ['Process', '/#process', 'process'],
+    ['Blog', '/blog', 'writing'],
+  ];
+  const spied = useActiveSection(items.map((item) => item[2]));
+  const active = isBlog ? 'writing' : spied;
   return (
-    <div style={{ position: 'relative', flexShrink: 0 }}>
-      {/* Glow shadow beneath phone */}
-      <div style={{
-        position: 'absolute', bottom: '-40px', left: '50%', transform: 'translateX(-50%)',
-        width: '220px', height: '60px',
-        background: 'radial-gradient(ellipse, rgba(0,0,0,0.25) 0%, transparent 70%)',
-        filter: 'blur(12px)',
-        zIndex: 0,
-      }} />
-
-      {/* Phone shell */}
-      <div style={{
-        width: '270px', height: '560px', flexShrink: 0,
-        background: 'linear-gradient(160deg, #2a2a2a 0%, #1a1a1a 100%)',
-        borderRadius: '50px',
-        padding: '16px 12px',
-        boxShadow: '0 0 0 1.5px #3a3a3a, 0 40px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)',
-        position: 'relative', zIndex: 1,
-      }}>
-        {/* Dynamic island / notch */}
-        <div style={{
-          position: 'absolute', top: '16px', left: '50%', transform: 'translateX(-50%)',
-          width: '100px', height: '28px', background: '#111',
-          borderRadius: '999px', zIndex: 10,
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
-        }}>
-          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#222' }} />
-          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1a1a1a', border: '1px solid #333' }} />
+    <header className="nav-wrap">
+      <nav className="nav" aria-label="Main">
+        <a className="nav-brand" href="/#home" onClick={() => setOpen(false)}>
+          <img src="/profile.jpeg" alt="" width="36" height="36" />
+          <span>Muhammad Umar</span>
+        </a>
+        <div className="nav-links">
+          {items.map(([label, href, id]) => (
+            <a key={href} href={href} className={active === id ? 'is-active' : undefined} aria-current={active === id ? 'true' : undefined}>{label}</a>
+          ))}
         </div>
+        <div className="nav-actions">
+          <a className="nav-contact" href="/#contact">Contact</a>
+          <button
+            className="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <i className={open ? 'fas fa-xmark' : 'fas fa-bars'} aria-hidden="true" />
+          </button>
+        </div>
+      </nav>
+      {open && (
+        <div className="nav-menu">
+          {[...items, ['Contact', '/#contact']].map(([label, href]) => (
+            <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+          ))}
+        </div>
+      )}
+    </header>
+  );
+}
 
-        {/* Side buttons */}
-        <div style={{ position: 'absolute', right: '-4px', top: '110px', width: '4px', height: '52px', background: '#333', borderRadius: '0 3px 3px 0' }} />
-        <div style={{ position: 'absolute', left: '-4px', top: '90px', width: '4px', height: '36px', background: '#333', borderRadius: '3px 0 0 3px' }} />
-        <div style={{ position: 'absolute', left: '-4px', top: '136px', width: '4px', height: '36px', background: '#333', borderRadius: '3px 0 0 3px' }} />
+function Json({ rows }) {
+  return (
+    <pre className="json" aria-label="Summary of Umar's role, location, stack and availability">
+      <code>
+        <span className="json-dim">{'{'}</span>{'\n'}
+        {rows.map(([key, value], i) => (
+          <React.Fragment key={key}>
+            {'  '}<span className="json-key">"{key}"</span><span className="json-dim">: </span>
+            {Array.isArray(value)
+              ? <><span className="json-dim">[</span>{value.map((v, j) => (
+                <React.Fragment key={v}><span className="json-str">"{v}"</span>{j < value.length - 1 && <span className="json-dim">, </span>}</React.Fragment>
+              ))}<span className="json-dim">]</span></>
+              : <span className="json-str">"{value}"</span>}
+            {i < rows.length - 1 && <span className="json-dim">,</span>}{'\n'}
+          </React.Fragment>
+        ))}
+        <span className="json-dim">{'}'}</span>
+      </code>
+    </pre>
+  );
+}
 
-        {/* Screen */}
-        <div style={{
-          width: '100%', height: '100%',
-          borderRadius: '36px', overflow: 'hidden',
-          background: '#0a0a0a', position: 'relative',
-        }}>
-          {/* Status bar */}
-          <div style={{
-            position: 'absolute', top: 0, left: 0, right: 0, height: '44px',
-            background: '#0a0a0a', zIndex: 5,
-            display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
-            padding: '0 20px 6px',
-          }}>
-            <span style={{ color: 'white', fontSize: '11px', fontWeight: 700, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              {new Date().getHours()}:{String(new Date().getMinutes()).padStart(2, '0')}
-            </span>
-            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              <i className="fas fa-signal" style={{ color: 'white', fontSize: '9px' }}></i>
-              <i className="fas fa-wifi" style={{ color: 'white', fontSize: '9px' }}></i>
-              <i className="fas fa-battery-three-quarters" style={{ color: 'white', fontSize: '10px' }}></i>
+function Hero() {
+  return (
+    <section id="home" className="hero">
+      <div className="container">
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <p className="chip"><span className="dot dot-green" />Open to roles &amp; freelance · Islamabad</p>
+            <h1>I turn ideas into <span className="grad">shipped products.</span></h1>
+            <p className="lead">
+              I&apos;m Umar, an AI-native software engineer. I build AI-powered web apps, Android apps,
+              games and the agents that market them.
+            </p>
+            <div className="btn-row">
+              <a className="btn btn-primary" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
+              <a className="btn btn-ghost" href={links.cv} target="_blank" rel="noopener noreferrer"><i className="fas fa-arrow-down" aria-hidden="true" /> Download CV</a>
             </div>
           </div>
 
-          {/* Slides */}
-          {slides.map((src, i) => (
-            <img
-              key={i} src={src} alt=""
-              style={{
-                position: 'absolute', top: 0, left: 0,
-                width: '100%', height: '100%',
-                objectFit: 'cover', objectPosition: 'top center',
-                opacity: i === current ? 1 : 0,
-                transition: 'opacity 0.8s ease',
-              }}
-            />
-          ))}
+          <div className="window hero-window">
+            <div className="window-bar"><span /><span /><span /><em>umar.json</em></div>
+            <img className="hero-photo" src="/profile.jpeg" alt="Muhammad Umar" width="1280" height="1050" />
+            <Json rows={[
+              ['role', 'AI-native Software Engineer'],
+              ['based', 'Islamabad, PK'],
+              ['stack', ['React', 'Next.js', 'Flutter']],
+              ['open_to', ['roles', 'freelance']],
+            ]} />
+          </div>
+        </div>
 
-          {/* Bottom home bar + dots */}
-          <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0, height: '48px',
-            background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)',
-            zIndex: 5, display: 'flex', flexDirection: 'column',
-            alignItems: 'center', justifyContent: 'flex-end', paddingBottom: '8px', gap: '6px',
-          }}>
-            <div style={{ display: 'flex', gap: '6px' }}>
-              {slides.map((_, i) => (
-                <div key={i} style={{
-                  width: i === current ? '18px' : '5px', height: '5px',
-                  background: i === current ? 'white' : 'rgba(255,255,255,0.35)',
-                  borderRadius: '999px', transition: 'all 0.4s ease',
-                }} />
+        <dl className="stats reveal">
+          {stats.map((s) => (
+            <div key={s.label}><dt>{s.label}</dt><dd>{s.num}</dd></div>
+          ))}
+        </dl>
+
+        <div className="building reveal">
+          <p className="mono-label">Building with</p>
+          <ul>{buildingWith.map((b) => <li key={b}>{b}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="section section-alt">
+      <div className="container about-grid">
+        <div className="about-left"><div className="about-left-inner">
+          <SectionHead eyebrow="About">Built like a senior. <span className="accent">Shipping like a startup.</span></SectionHead>
+          <div className="card now reveal">
+            <p className="mono-label"><span className="dot dot-green" />Now shipping</p>
+            <ul>
+              {featured.map((p) => (
+                <li key={p.id}>
+                  <a href="#work">{p.title}</a>
+                  <span className={`status status-${p.statusTone}`}>{p.status}</span>
+                </li>
               ))}
-            </div>
-            <div style={{ width: '100px', height: '4px', background: 'rgba(255,255,255,0.4)', borderRadius: '999px' }} />
+            </ul>
+          </div>
+        </div></div>
+        <div className="about-right reveal">
+          <div className="prose">
+            <p>I started coding 4 years ago, right when LLMs began rewriting how software is built. Claude, Cursor and GPT are daily tools for me, and I work across the full stack with Next.js, React, Flutter, Node and Supabase.</p>
+            <p>Recently that has meant going beyond websites: a Flutter CV app with Gemini, a Godot puzzle game going through Google Play testing, and an agent that markets that game by itself.</p>
+            <p className="prose-strong">Speed is a skill. Taste is a skill. I&apos;m working on both.</p>
+            <p>Open to full-time engineering roles and selective freelance work for founders who need to move fast.</p>
+          </div>
+
+          <p className="mono-label about-label">Skills &amp; technologies</p>
+          <div className="skills">
+            {skillGroups.map((g) => (
+              <div className="skill-row" key={g.label}>
+                <h3>{g.label}</h3>
+                <ul className="tags">{g.items.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+
+          <p className="mono-label about-label">Education</p>
+          <div className="edu">
+            {education.map((e) => (
+              <div className="card edu-card" key={e.degree}>
+                <h3>{e.degree}</h3>
+                <p className="accent">{e.inst}</p>
+                <p>{e.year}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+function Experience() {
+  return (
+    <section id="experience" className="section">
+      <div className="container process-grid">
+        <div className="process-side">
+          <SectionHead eyebrow="Experience" sub="Research and product work on bringing AI into Karachi schools.">
+            Where I&apos;ve <span className="accent">worked.</span>
+          </SectionHead>
+        </div>
+        <ol className="timeline">
+          {experience.map((job) => (
+            <li className="reveal" key={job.role}>
+              <span className="timeline-dot" aria-hidden="true" />
+              <div className="card timeline-card job">
+                <div className="job-head">
+                  <h3>{job.role}</h3>
+                  <span className="mono-tag">{job.period}</span>
+                </div>
+                <p className="job-org"><span className="accent">{job.org}</span> · {job.place}</p>
+                <ul className="bullets">{job.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                <ul className="tags tags-sm">{job.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                {job.demo && (
+                  <a className="job-demo" href={job.demo.href} target="_blank" rel="noopener noreferrer">
+                    <img src={job.demo.img} alt={job.demo.alt} width="1000" height="625" loading="lazy" />
+                    <span className="job-demo-bar">
+                      <span>
+                        <b>{job.demo.title}</b>
+                        <em>{job.demo.note}</em>
+                      </span>
+                      <span className="accent job-demo-open">Open demo <span aria-hidden="true">↗</span></span>
+                    </span>
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function ProjectLink({ link, primary }) {
+  return (
+    <a className={primary ? 'btn btn-primary btn-sm' : 'text-link'} href={link.href} target="_blank" rel="noopener noreferrer">
+      {link.label} <span aria-hidden="true">↗</span>
+    </a>
+  );
+}
+
+function FeaturedVisual({ visual }) {
+  return (
+    <div className="window feature-window">
+      <div className="window-bar"><span /><span /><span /><em>{visual.file}</em></div>
+      {visual.type === 'image' && <img src={visual.src} alt={visual.alt} width="1024" height="500" loading="lazy" />}
+      {visual.type === 'game' && (
+        <div className="game-visual">
+          <img src={visual.src} alt={visual.alt} width="1024" height="500" loading="lazy" />
+          <div className="game-screens">
+            {visual.screens.map((screen) => <img key={screen.src} src={screen.src} alt={screen.alt} loading="lazy" />)}
+          </div>
+        </div>
+      )}
+      {visual.type === 'terminal' && (
+        <div className="terminal">
+          <p><span className="json-dim">$</span> <span className="json-str">agent run</span> <span className="json-dim">--every-day</span> 18:00</p>
+          {pipeline.map(([step, note]) => (
+            <p key={step}><span className="tick">✓</span> <b>{step}</b><span className="json-dim">{note}</span></p>
+          ))}
+          <p className="terminal-last"><span className="accent">→</span> next reel queued <span className="json-dim">·</span> <span className="json-str">cost: $0</span></p>
+        </div>
+      )}
     </div>
   );
 }
 
-/* ── Main App ── */
+function Work() {
+  return (
+    <section id="work" className="section">
+      <div className="container">
+        <SectionHead eyebrow="Work" sub="Three new builds first, followed by the rest of my projects.">
+          Apps, games and <span className="accent">agents I&apos;ve built.</span>
+        </SectionHead>
+
+        <div className="featured">
+          {featured.map((p, i) => (
+            <article className={`feature reveal${i % 2 ? ' feature-flip' : ''}`} key={p.id}>
+              <FeaturedVisual visual={p.visual} />
+              <div className="feature-copy">
+                <div className="feature-title">
+                  {p.icon ? <img src={p.icon} alt="" width="48" height="48" /> : <span className="agent-icon"><i className="fas fa-robot" aria-hidden="true" /></span>}
+                  <div>
+                    <h3>{p.title}</h3>
+                    <p>{p.kind}</p>
+                  </div>
+                </div>
+                <p className={`status status-${p.statusTone}`}><span className="dot" />{p.status}</p>
+                <p className="feature-desc">{p.desc}</p>
+                <ul className="bullets">{p.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
+                <ul className="tags">{p.tech.map((t) => <li key={t}>{t}</li>)}</ul>
+                <div className="btn-row feature-links">
+                  {p.links.map((l) => <ProjectLink key={l.href} link={l} primary={l.primary} />)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <h3 className="more-title reveal">More projects</h3>
+        <div className="project-grid">
+          {projects.map((p) => (
+            <article className="card project reveal" key={p.title}>
+              <div className="project-img">
+                <img src={p.img} alt={`${p.title} 3D artwork`} width="1280" height="800" loading="lazy" />
+              </div>
+              <div className="project-body">
+                <div className="project-head">
+                  <h4>{p.title}</h4>
+                  <p className={`status status-${p.tone}`}><span className="dot" />{p.status}</p>
+                </div>
+                <p className="project-desc">{p.desc}</p>
+                <ul className="tags tags-sm">{p.tech.map((t) => <li key={t}>{t}</li>)}</ul>
+                <div className="project-links">
+                  {p.links.map((l) => <ProjectLink key={l.href} link={l} />)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Certifications() {
+  if (!certifications.length) return null;
+  return (
+    <section id="certifications" className="section section-alt">
+      <div className="container">
+        <SectionHead eyebrow="Certifications" sub="Courses I've completed, with links you can check yourself.">
+          Keep learning. <span className="accent">Prove it.</span>
+        </SectionHead>
+        <div className="cert-grid">
+          {certifications.map((c) => {
+            const Tag = c.url ? 'a' : 'div';
+            const linkProps = c.url ? { href: c.url, target: '_blank', rel: 'noopener noreferrer' } : {};
+            return (
+              <Tag className={`card cert reveal${c.featured ? ' cert-featured' : ''}`} key={c.title} {...linkProps}>
+                <div className="cert-top">
+                  <span className="cert-icon"><i className="fas fa-award" aria-hidden="true" /></span>
+                  {c.level && <span className="cert-level">{c.level}</span>}
+                </div>
+                <h3>{c.title}</h3>
+                <p className="mono-tag">{[c.issuer, c.code, c.year].filter(Boolean).join(' · ')}</p>
+                {c.desc && <p className="cert-desc">{c.desc}</p>}
+                {c.url && <p className="accent cert-verify">Verify badge <span aria-hidden="true">↗</span></p>}
+              </Tag>
+            );
+          })}
+        </div>
+        <p className="cert-more reveal">More certificates are being uploaded.</p>
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section id="process" className="section section-alt">
+      <div className="container process-grid">
+        <div className="process-side">
+          <SectionHead eyebrow="Process" sub="A short path from your idea to something people can use.">
+            How we&apos;d <span className="accent">work together.</span>
+          </SectionHead>
+        </div>
+        <div>
+          <ol className="timeline">
+            {steps.map((s, i) => (
+              <li className="reveal" key={s.title}>
+                <span className="timeline-dot" aria-hidden="true" />
+                <div className="card timeline-card">
+                  <div className="timeline-head">
+                    <h3>{s.title}</h3>
+                    <span className="mono-num">0{i + 1}</span>
+                  </div>
+                  <p>{s.desc}</p>
+                  <p className="mono-tag">{s.tag}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <p className="mono-label services-label reveal">What I take on</p>
+          <ul className="services reveal">
+            {services.map((s) => (
+              <li key={s.label}><span>{s.label}</span><span className="mono-tag">{s.note}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="section">
+      <div className="container faq-container">
+        <SectionHead eyebrow="FAQ">Questions you <span className="accent">might have.</span></SectionHead>
+        <div className="faq reveal">
+          {faqs.map((f, i) => (
+            <details key={f.q} open={i === 0}>
+              <summary>{f.q}<i className="fas fa-plus" aria-hidden="true" /></summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  const [booking, setBooking] = useState(false);
+  const rows = [
+    ['Email', links.email, `mailto:${links.email}?subject=Project%20inquiry`],
+    ['WhatsApp', '+92 340 2288644', links.whatsapp],
+    ['LinkedIn', 'umar-khan-dev', links.linkedin],
+    ['GitHub', 'umar2334', links.github],
+    ['Instagram', 'umarkhan404', links.instagram],
+    ['X', 'umarkhn895', links.x],
+  ];
+  return (
+    <section id="contact" className="section section-alt contact">
+      {booking && <BookingModal onClose={() => setBooking(false)} />}
+      <div className="container contact-grid">
+        <div className="reveal">
+          <p className="eyebrow">Contact</p>
+          <h2 className="contact-title">Have something <span className="grad">worth building?</span></h2>
+          <p className="lead">Send me the idea or the JD. I reply within a few hours, and you&apos;ll get an honest answer on what&apos;s realistic.</p>
+          <div className="btn-row">
+            <a className="btn btn-primary" href={links.whatsapp} target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp" aria-hidden="true" /> Message on WhatsApp</a>
+            <button className="btn btn-ghost" type="button" onClick={() => setBooking(true)}><i className="fas fa-calendar" aria-hidden="true" /> Book a 15-min call</button>
+          </div>
+        </div>
+        <dl className="card contact-rows reveal">
+          {rows.map(([label, value, href]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd><a href={href} target="_blank" rel="noopener noreferrer">{value}</a></dd>
+            </div>
+          ))}
+          <div><dt>Location</dt><dd>Islamabad, Pakistan · GMT+5</dd></div>
+        </dl>
+      </div>
+    </section>
+  );
+}
+
+function currentPage() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (path === '/') return { name: 'home' };
+  if (path === '/blog') return { name: 'blog' };
+  const match = path.match(/^\/blog\/([^/]+)$/);
+  const article = match && articles.find((a) => a.slug === match[1]);
+  return article ? { name: 'post', article } : { name: 'missing' };
+}
+
+function Home() {
+  return (
+    <main>
+      <Hero />
+      <About />
+      <Experience />
+      <Work />
+      <Certifications />
+      <Process />
+      <WritingSection />
+      <Faq />
+      <Contact />
+    </main>
+  );
+}
+
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [scrolled, setScrolled] = useState(false);
+  const [page] = useState(currentPage);
+  useReveal();
 
+  /* The page renders after load, so the browser can't jump to /#section by itself. */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const jump = () => document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
+    jump();
+    document.fonts?.ready.then(jump); // web fonts can shift the layout after the first jump
   }, []);
-
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <>
-      <style>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { background: #FAFAF9; font-family: 'Plus Jakarta Sans', sans-serif; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
-
-        .pill-btn {
-          background: #111; color: white; padding: 12px 28px; border-radius: 999px;
-          font-size: 14px; font-weight: 600; text-decoration: none;
-          font-family: 'Plus Jakarta Sans', sans-serif; border: 1px solid #222;
-          transition: background 0.2s; display: inline-block; cursor: pointer;
-        }
-        .pill-btn:hover { background: #333; }
-
-        .pill-btn-outline {
-          background: transparent; color: #111; padding: 12px 28px; border-radius: 999px;
-          font-size: 14px; font-weight: 600; text-decoration: none;
-          font-family: 'Plus Jakarta Sans', sans-serif; border: 1px solid #2a2a2a;
-          transition: background 0.2s; display: inline-block; cursor: pointer;
-        }
-        .pill-btn-outline:hover { background: #f0f0f0; }
-
-        /* Centered pill nav links */
-        .nav-link {
-          background: none; border: none; cursor: pointer;
-          font-size: 14px; color: #333; font-weight: 500;
-          padding: 7px 16px; border-radius: 999px;
-          font-family: 'Plus Jakarta Sans', sans-serif;
-          transition: background 0.2s, color 0.2s;
-          white-space: nowrap;
-        }
-        .nav-link:hover { background: #f0f0f0; color: #111; }
-
-        .nav-contact-btn {
-          background: none; border: 1px solid #d0d0d0; cursor: pointer;
-          font-size: 14px; color: #111; font-weight: 600;
-          padding: 7px 20px; border-radius: 999px;
-          font-family: 'Plus Jakarta Sans', sans-serif;
-          transition: background 0.2s, border-color 0.2s;
-          white-space: nowrap;
-        }
-        .nav-contact-btn:hover { background: #111; color: white; border-color: #111; }
-
-        /* Nav items slide out on scroll */
-        .nav-links-group {
-          display: flex; align-items: center; gap: 2px;
-          overflow: hidden;
-          max-width: 500px; opacity: 1;
-          transition: max-width 0.4s ease, opacity 0.3s ease;
-        }
-        .nav-links-group.collapsed {
-          max-width: 0; opacity: 0; pointer-events: none;
-        }
-
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(28px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeUp 0.8s ease forwards; }
-
-        @media (max-width: 768px) {
-          .hero-section { padding: 110px 24px 64px !important; }
-          .hero-title { font-size: 48px !important; }
-          .hero-layout { flex-direction: column !important; gap: 48px !important; align-items: flex-start !important; }
-          .phone-col { align-self: center !important; }
-          .projects-section { padding: 72px 24px !important; }
-          .projects-grid { grid-template-columns: 1fr !important; }
-          .skills-section { padding: 72px 24px !important; }
-          .skills-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .contact-section { padding: 72px 24px !important; }
-          .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .footer-inner { flex-direction: column !important; gap: 16px !important; text-align: center; }
-          .hero-info-table { display: none !important; }
-          .nav-links-group { display: none !important; }
-        }
-      `}</style>
-
-      {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
-
-      {!loading && (
-        <div style={{ minHeight: '100vh', background: '#FAFAF9' }}>
-
-          {/* ── Centered Pill Navigation ── */}
-          <div style={{
-            position: 'fixed', top: '20px', left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 1000,
-          }}>
-            <nav style={{
-              display: 'flex', alignItems: 'center', gap: '2px',
-              background: 'rgba(255,255,255,0.95)',
-              border: '1px solid #e0e0e0',
-              borderRadius: '999px',
-              padding: '5px 5px 5px 6px',
-              boxShadow: '0 2px 24px rgba(0,0,0,0.09)',
-              backdropFilter: 'blur(16px)',
-              transition: 'padding 0.35s ease',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-            }}>
-              {/* Avatar — icon.jpeg */}
-              <div style={{
-                width: '34px', height: '34px', borderRadius: '50%',
-                background: '#111', flexShrink: 0, overflow: 'hidden',
-                border: '2px solid #e0e0e0',
-              }}>
-                <img
-                  src="/icon.jpeg" alt="Umar"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
-                />
-              </div>
-
-              {/* Name */}
-              <span
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{
-                  fontSize: '15px', fontWeight: 800, color: '#111',
-                  fontFamily: "'Cabinet Grotesk', sans-serif",
-                  padding: '0 10px 0 8px', cursor: 'pointer',
-                  letterSpacing: '0.01em', flexShrink: 0,
-                }}
-              >Umar.</span>
-
-              {/* Separator */}
-              <div style={{ width: '1px', height: '20px', background: '#e0e0e0', flexShrink: 0, margin: '0 4px' }} />
-
-              {/* Nav links — collapse on scroll */}
-              <div className={`nav-links-group${scrolled ? ' collapsed' : ''}`}>
-                <button className="nav-link" onClick={() => scrollTo('about')}>About</button>
-                <button className="nav-link" onClick={() => scrollTo('projects')}>Work</button>
-                <button className="nav-link" onClick={() => scrollTo('skills')}>Stack</button>
-                <button className="nav-contact-btn" onClick={() => scrollTo('contact')}>
-                  Contact
-                </button>
-              </div>
-            </nav>
+      <div className="backdrop" aria-hidden="true" />
+      <CursorGlow />
+      <Nav isBlog={page.name === 'blog' || page.name === 'post'} />
+      {page.name === 'home' && <Home />}
+      {page.name === 'blog' && <main><BlogIndex /></main>}
+      {page.name === 'post' && <main><BlogPost article={page.article} /></main>}
+      {page.name === 'missing' && <main><NotFound /></main>}
+      <footer className="footer">
+        <div className="container footer-inner">
+          <div>
+            <p className="footer-name">Muhammad Umar</p>
+            <p>AI-native software engineer. Built in Pakistan. © {new Date().getFullYear()}</p>
           </div>
-
-          {/* ── Hero / About ── */}
-          <section id="about" className="hero-section fade-up" style={{
-            minHeight: '100vh', display: 'flex', alignItems: 'center',
-            padding: '120px 60px 80px',
-            background: 'radial-gradient(ellipse 80% 60% at 70% 60%, #e8e8e4 0%, #FAFAF9 60%)',
-            overflow: 'hidden',
-          }}>
-            <div style={{ maxWidth: '1040px', width: '100%', margin: '0 auto' }}>
-
-              <div className="hero-layout" style={{ display: 'flex', gap: '40px', alignItems: 'center', justifyContent: 'space-between' }}>
-
-                {/* Left — text */}
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  {/* Available badge */}
-                  <div style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    border: '1px solid #d8d8d8', borderRadius: '999px',
-                    padding: '6px 14px', marginBottom: '32px',
-                    background: 'white',
-                  }}>
-                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
-                    <span style={{ fontSize: '13px', color: '#444', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                      Open to roles & freelance
-                    </span>
-                  </div>
-
-                  {/* Title — sharper positioning */}
-                  <h1 className="hero-title" style={{
-                    fontFamily: "'Cabinet Grotesk', sans-serif",
-                    fontWeight: 800, lineHeight: 1.05,
-                    letterSpacing: '-0.03em', marginBottom: '24px',
-                    fontSize: 'clamp(42px, 6vw, 72px)',
-                  }}>
-                    <span style={{ display: 'block', color: '#111' }}>I ship </span>
-                    <span style={{ display: 'block' }}>
-                      <em style={{ color: '#b0b0b0', fontStyle: 'italic', fontWeight: 800 }}>production</em>
-                      <span style={{ color: '#111' }}> web apps.</span>
-                    </span>
-                  </h1>
-
-                  {/* Stack tag */}
-                  <p style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em',
-                    color: '#888', textTransform: 'uppercase',
-                    marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px',
-                  }}>
-                    React · Next.js · Flutter · AI-native
-                  </p>
-
-                  <p style={{
-                    color: '#555', fontSize: '15px', lineHeight: 1.75,
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    maxWidth: '440px', marginBottom: '36px',
-                  }}>
-                    I'm <strong style={{ color: '#111' }}>Umar</strong> — a software engineer who builds production-ready web and mobile apps using AI as a co-pilot. Solo, fast, and shipping every week.
-                  </p>
-
-                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                    <button
-                      onClick={() => scrollTo('projects')}
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '12px',
-                        background: '#111', color: 'white', border: 'none',
-                        padding: '16px 28px', borderRadius: '999px',
-                        fontSize: '15px', fontWeight: 700, cursor: 'pointer',
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        transition: 'background 0.2s',
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.background = '#333'; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = '#111'; }}
-                    >
-                      See my work
-                      <span style={{
-                        width: '26px', height: '26px', borderRadius: '50%',
-                        background: 'rgba(255,255,255,0.15)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px',
-                      }}>↗</span>
-                    </button>
-                    <button
-                      onClick={() => scrollTo('contact')}
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '10px',
-                        background: 'transparent', color: '#111',
-                        padding: '16px 24px', borderRadius: '999px',
-                        border: '1px solid #d0d0d0', cursor: 'pointer',
-                        fontSize: '15px', fontWeight: 600,
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        transition: 'background 0.2s',
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.background = '#f0f0f0'; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
-                    >
-                      Get in touch
-                    </button>
-                  </div>
-                </div>
-
-                {/* Right — phone mockup, slightly tilted */}
-                <div className="phone-col" style={{ flexShrink: 0, display: 'flex', justifyContent: 'center' }}>
-                  <div style={{ transform: 'rotate(4deg)', transformOrigin: 'center bottom' }}>
-                    <PhoneMockup />
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-
-          {/* ── Now / Currently shipping (build-in-public) ── */}
-          <NowSection />
-
-          {/* ── About ── */}
-          <AboutSection />
-
-          {/* ── Stats Strip ── */}
-          <StatsStrip />
-
-          {/* ── Projects ── */}
-          <PortfolioTab />
-
-          {/* ── Process ── */}
-          <ProcessSection />
-
-          {/* ── Skills ── */}
-          <ResumeTab />
-
-          {/* ── FAQ ── */}
-          <FAQSection />
-
-          {/* ── Contact ── */}
-          <ContactTab />
-
-          {/* ── Footer ── */}
-          <footer style={{ background: '#f4f4f2', borderTop: '1px solid #e0e0e0', padding: '32px 48px' }}>
-            <div className="footer-inner" style={{ maxWidth: '1040px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-
-              {/* Left — name + location */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <p style={{
-                  fontFamily: "'Cabinet Grotesk', sans-serif", fontWeight: 800,
-                  fontSize: '14px', color: '#111',
-                }}>
-                  Muhammad Umar
-                </p>
-                <p style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: '12px', color: '#777',
-                }}>
-                  Built in Karachi, Pakistan 🇵🇰  ·  © 2026
-                </p>
-              </div>
-
-              {/* Right — social icons */}
-              <div style={{ display: 'flex', gap: '8px' }}>
-                {[
-                  { href: 'https://github.com/umar2334', icon: 'fab fa-github', bg: '#1f2937', label: 'GitHub' },
-                  { href: 'https://www.linkedin.com/in/muhammad-umar-khan-khan/', icon: 'fab fa-linkedin-in', bg: '#0a66c2', label: 'LinkedIn' },
-                  { href: 'https://twitter.com/umarkhn895', icon: 'fab fa-x-twitter', bg: '#000', label: 'X / Twitter' },
-                  { href: 'https://www.instagram.com/umarkhan404/', icon: 'fab fa-instagram', bg: '#E1306C', label: 'Instagram' },
-                  { href: 'mailto:umarkhn895@gmail.com', icon: 'fas fa-envelope', bg: '#444', label: 'Email' },
-                ].map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}
-                    style={{
-                      width: '36px', height: '36px', borderRadius: '10px',
-                      background: s.bg, color: 'white',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      textDecoration: 'none', fontSize: '14px',
-                      transition: 'opacity 0.2s',
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.opacity = '0.8'; }}
-                    onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
-                  >
-                    <i className={s.icon}></i>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </footer>
-
+          <a className="text-link" href="#">Back to top <span aria-hidden="true">↑</span></a>
         </div>
-      )}
+      </footer>
     </>
   );
 }

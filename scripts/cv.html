@@ -1,0 +1,144 @@
+<!doctype html>
+<!--
+  Source of public/umarcv.pdf. After editing, rebuild from the repo root:
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
+    --no-pdf-header-footer --print-to-pdf="$PWD/public/umarcv.pdf" "file://$PWD/scripts/cv.html"
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Muhammad Umar - CV</title>
+<style>
+  @page { size: Letter; margin: 0.5in 0.55in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Calibri, Carlito, Arial, Helvetica, sans-serif; font-size: 10.2pt; line-height: 1.26; color: #111; }
+  a { color: #1a56c4; text-decoration: underline; }
+  h1 { font-size: 21pt; line-height: 1.1; color: #1f2d3d; }
+  .role { font-size: 11.5pt; color: #555; margin-top: 2px; }
+  .contact { margin-top: 4px; font-size: 9.6pt; }
+  .contact-links { font-size: 9pt; white-space: nowrap; }
+  h2 { margin-top: 11px; margin-bottom: 5px; padding-bottom: 2px; border-bottom: 1.2px solid #111; font-size: 11.5pt; color: #1f2d3d; break-after: avoid; }
+  ul { padding-left: 16px; }
+  li { margin-bottom: 1.5px; }
+  .item { margin-bottom: 5px; break-inside: avoid; }
+  .item-title { font-weight: 700; }
+  .item-meta { font-size: 9.4pt; font-style: italic; color: #555; }
+  .muted { color: #666; }
+</style>
+</head>
+<body>
+  <h1>Muhammad Umar</h1>
+  <p class="role">Software Engineer</p>
+  <p class="contact">umarfreelancerweb@gmail.com &nbsp;|&nbsp; +92 340 2288644 &nbsp;|&nbsp; Islamabad, Pakistan &nbsp;|&nbsp; Open to Remote (Worldwide)</p>
+  <p class="contact contact-links">
+    <a href="https://muhammadumar18.vercel.app">Portfolio: muhammadumar18.vercel.app</a> &nbsp;|&nbsp;
+    <a href="https://github.com/umar2334">GitHub: github.com/umar2334</a> &nbsp;|&nbsp;
+    <a href="https://www.linkedin.com/in/umar-khan-dev/">LinkedIn: linkedin.com/in/umar-khan-dev</a>
+  </p>
+
+  <h2>Professional Summary</h2>
+  <p>Software engineer specializing in React, Next.js, and Flutter, with hands-on experience shipping production software solo and in small teams. Built and deployed LeadHunter Pro, a live AI lead-generation SaaS (Next.js + Gemini AI + Chrome Extension) with active paying users, plus an SEO-optimized media portal and three published Android apps. Recently built AppnaCV, an AI CV maker for Android; JAMBLIT, a Godot puzzle game in closed testing on Google Play; and an autonomous agent that markets it on Instagram. Comfortable owning features end-to-end — Figma to Firebase/Supabase backend to deployment — and used to working async and self-directed as a freelancer. BS Software Engineering, Indus University (Jan 2026).</p>
+
+  <h2>Technical Skills</h2>
+  <ul>
+    <li><b>Frontend:</b> React.js, Next.js, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind CSS</li>
+    <li><b>Mobile &amp; Games:</b> Flutter, Dart, Godot, GDScript — Android APK builds and Play Store publishing</li>
+    <li><b>Backend &amp; Database:</b> Node.js, Firebase (Firestore, Auth, Storage), Supabase, REST APIs</li>
+    <li><b>AI &amp; Integrations:</b> Gemini AI API, Google Maps API, Chrome Extension APIs, Instagram Graph API, AdMob</li>
+    <li><b>Automation:</b> Python, edge-tts, launchd scheduling</li>
+    <li><b>Tools &amp; Practices:</b> Git, GitHub, Figma, WordPress, SSR/SSG, SEO fundamentals, async/remote collaboration</li>
+  </ul>
+
+  <h2>Projects</h2>
+  <div class="item">
+    <p class="item-title">LeadHunter Pro — AI Lead Generation SaaS</p>
+    <p class="item-meta">Next.js · Gemini AI · Chrome Extension · Firebase — Live, acquiring paying users</p>
+    <ul>
+      <li>Built a full SaaS platform with a paired Chrome Extension that uses Gemini AI to generate qualified leads from public web sources</li>
+      <li>Shipped subscription dashboard, user authentication, and API rate limiting end-to-end, solo</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">AppnaCV — AI CV Maker for Android</p>
+    <p class="item-meta">Flutter · Firebase · Gemini AI — Early access — <a href="https://resumeai-ff3d4.web.app/">resumeai-ff3d4.web.app</a></p>
+    <ul>
+      <li>Built an AI CV app with voice input in Urdu and Roman Urdu, ATS scoring, job-specific tailoring, cover letters, 42 templates and PDF export</li>
+      <li>Hardened the AI layer: personal details are not sent to AI features, prompt-injection defences are tested on a real phone, and AI rules forbid inventing experience</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">JAMBLIT — Bus-Jam Puzzle Game for Android</p>
+    <p class="item-meta">Godot 4 · GDScript · AdMob · Firebase — Closed testing on Google Play</p>
+    <ul>
+      <li>Built a procedural level generator that creates boards backwards from the solution, so the same level number gives the same board on every phone</li>
+      <li>Added an automated headless test that checks 330 generated levels, plus daily challenges, ads and analytics</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">JAMBLIT Reel Agent — Autonomous Instagram Marketing Agent</p>
+    <p class="item-meta">Python · Instagram Graph API · edge-tts · launchd — Running daily, $0 running cost</p>
+    <ul>
+      <li>Built an agent that works through a 30-day plan of unique reels, combining animated skits and real gameplay recorded through the game's autoplay</li>
+      <li>Automated AI voice, word-synced captions, rendering and daily scheduled posting through Instagram's official API</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">TurkVerse — SEO Media Portal</p>
+    <p class="item-meta">Next.js · SSR/SSG · SEO</p>
+    <ul>
+      <li>Architected an SEO-optimized media portal using Next.js SSR/SSG with structured data for search visibility</li>
+      <li>Implemented dynamic routing, image optimization, and a performant category/search experience</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">APNNCV — Resume Builder SaaS</p>
+    <p class="item-meta">React.js · Firebase · Tailwind CSS</p>
+    <ul>
+      <li>Built an ATS-friendly resume builder with multiple templates, live PDF export, and real-time preview</li>
+      <li>Implemented Firebase Auth and Firestore for user accounts and resume persistence</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">Society Management System — Admin &amp; Resident Portal</p>
+    <p class="item-meta">Flutter · Dart · Firebase · Android — Published, v1.0.27</p>
+    <ul>
+      <li>Built a dual-role mobile app (admin + resident) for housing-society operations with real-time Firebase sync</li>
+      <li>Shipped to production on Android and maintained through multiple release iterations</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">Finance App — Expense Tracker</p>
+    <p class="item-meta">Flutter · Dart · Supabase</p>
+    <ul>
+      <li>Built a cross-platform expense tracker with multiple chart views, Supabase cloud sync, and offline-first support</li>
+    </ul>
+  </div>
+  <div class="item">
+    <p class="item-title">Ghumo — Pakistan Travel Explorer</p>
+    <p class="item-meta">Flutter · Dart · Google Maps API — Published as Android APK</p>
+    <ul>
+      <li>Built a travel discovery app featuring interactive maps, live weather, and hiking-trail data</li>
+    </ul>
+  </div>
+
+  <h2>Experience</h2>
+  <div class="item">
+    <p><span class="item-title">Global Encounters Intern, Digital Learning &amp; Innovation</span> — Aga Khan Education Service, Pakistan (AKESP)</p>
+    <p class="item-meta">Jun 2026 – Aug 2026 · Karachi</p>
+    <ul>
+      <li>Conducted primary research (site visits, structured interviews) across AKESP South Region's four Karachi schools to document ICT infrastructure and curriculum gaps, authoring an 8-page article with a five-year AI integration roadmap</li>
+      <li>Proposed and prototyped Teacher Assistant AI, a web tool giving students real-time coding hints and teachers an AI-reviewed submission dashboard, backed by CHI 2024 research, a working Figma prototype and a <a href="https://teacherassistantaidemo.netlify.app/">clickable demo</a></li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+  <p><b>BS Software Engineering — Indus University, Karachi</b> <span class="muted">(2022 – Jan 2026)</span></p>
+  <p>Intermediate (Pre-Engineering, Computer Science) — Fatimiyah Boys College, Karachi <span class="muted">(2019 – 2021)</span></p>
+
+  <h2>Certifications</h2>
+  <p><b>AI Fluency: Framework and Foundations</b> — Claude Academy <span class="muted">(Nov 2026)</span> — <a href="https://academy.claude.com/verify/88895a76d216cb5434c73e578ea00fd9">Verify badge</a></p>
+
+  <h2>Languages</h2>
+  <p>English (Professional) · Urdu (Native)</p>
+</body>
+</html>

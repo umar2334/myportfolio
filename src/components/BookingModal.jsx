@@ -79,6 +79,7 @@ export default function BookingModal({ onClose }) {
 
   return (
     <div
+      className="booking-overlay"
       onClick={onClose}
       style={{
         position: 'fixed', inset: 0, zIndex: 9000,
@@ -89,6 +90,7 @@ export default function BookingModal({ onClose }) {
       }}
     >
       <div
+        className="booking-card"
         onClick={e => e.stopPropagation()}
         style={{
           background: '#18181b',
@@ -103,7 +105,7 @@ export default function BookingModal({ onClose }) {
         }}
       >
         {/* ── Left panel ── */}
-        <div style={{
+        <div className="booking-info" style={{
           width: '220px', flexShrink: 0,
           padding: '32px 24px',
           borderRight: '1px solid rgba(255,255,255,0.08)',
@@ -117,27 +119,27 @@ export default function BookingModal({ onClose }) {
             <img src="/icon.jpeg" alt="Umar" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
           </div>
 
-          <p style={{ color: '#a1a1aa', fontSize: '13px', fontFamily: "'Plus Jakarta Sans', sans-serif", marginTop: '4px' }}>
+          <p style={{ color: '#a1a1aa', fontSize: '13px', fontFamily: "'Geist', sans-serif", marginTop: '4px' }}>
             Muhammad Umar
           </p>
 
           <h3 style={{
             color: 'white', fontSize: '20px', fontWeight: 800,
-            fontFamily: "'Cabinet Grotesk', sans-serif", lineHeight: 1.2,
+            fontFamily: "'Geist', sans-serif", lineHeight: 1.2,
           }}>
             15 min meeting
           </h3>
 
-          <p style={{ color: '#71717a', fontSize: '13px', fontFamily: "'Plus Jakarta Sans', sans-serif", lineHeight: 1.6 }}>
+          <p style={{ color: '#71717a', fontSize: '13px', fontFamily: "'Geist', sans-serif", lineHeight: 1.6 }}>
             A quick intro call to map your vision &amp; timeline. I'll review your idea and pinpoint the exact next step — no fluff.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '8px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#a1a1aa', fontSize: '13px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#a1a1aa', fontSize: '13px', fontFamily: "'Geist', sans-serif" }}>
               <i className="fas fa-clock" style={{ fontSize: '12px', width: '16px' }}></i>
               15m
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#a1a1aa', fontSize: '13px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#a1a1aa', fontSize: '13px', fontFamily: "'Geist', sans-serif" }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
                 <path d="M21 8.5L17 12l4 3.5V8.5z" fill="#00BFA5"/>
                 <rect x="3" y="7" width="14" height="10" rx="2" fill="#4CAF50"/>
@@ -145,7 +147,7 @@ export default function BookingModal({ onClose }) {
               </svg>
               Google Meet
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#a1a1aa', fontSize: '13px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#a1a1aa', fontSize: '13px', fontFamily: "'Geist', sans-serif" }}>
               <i className="fas fa-globe" style={{ fontSize: '12px', width: '16px' }}></i>
               Asia/Karachi
             </div>
@@ -157,7 +159,7 @@ export default function BookingModal({ onClose }) {
           {/* Month header */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
             <h4 style={{
-              color: 'white', fontFamily: "'Cabinet Grotesk', sans-serif",
+              color: 'white', fontFamily: "'Geist', sans-serif",
               fontSize: '17px', fontWeight: 800,
             }}>
               <span style={{ color: 'white' }}>{MONTH_NAMES[viewMonth]}</span>{' '}
@@ -185,7 +187,7 @@ export default function BookingModal({ onClose }) {
             {DAY_NAMES.map(d => (
               <div key={d} style={{
                 textAlign: 'center', fontSize: '11px', fontWeight: 700,
-                color: '#52525b', fontFamily: "'Plus Jakarta Sans', sans-serif",
+                color: '#52525b', fontFamily: "'Geist', sans-serif",
                 paddingBottom: '6px',
               }}>{d}</div>
             ))}
@@ -207,10 +209,10 @@ export default function BookingModal({ onClose }) {
                     borderRadius: '50%',
                     border: 'none',
                     cursor: past ? 'default' : 'pointer',
-                    background: isSel ? 'white' : 'transparent',
+                    background: isSel ? '#ff7a1a' : 'transparent',
                     color: past ? '#3f3f46' : isSel ? '#111' : 'white',
                     fontSize: '14px', fontWeight: 600,
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Geist', sans-serif",
                     position: 'relative',
                     transition: 'background 0.15s',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -235,10 +237,10 @@ export default function BookingModal({ onClose }) {
 
         {/* ── Right: Time slots (only when date selected) ── */}
         {selectedDate && (
-          <div style={{ width: '200px', flexShrink: 0, padding: '32px 16px 32px 20px', display: 'flex', flexDirection: 'column', gap: '0' }}>
+          <div className="booking-times" style={{ width: '200px', flexShrink: 0, padding: '32px 16px 32px 20px', display: 'flex', flexDirection: 'column', gap: '0' }}>
             {/* Header with 12h/24h toggle */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-              <p style={{ color: 'white', fontSize: '15px', fontWeight: 700, fontFamily: "'Cabinet Grotesk', sans-serif" }}>
+              <p style={{ color: 'white', fontSize: '15px', fontWeight: 700, fontFamily: "'Geist', sans-serif" }}>
                 {selectedLabel}
               </p>
               <div style={{ display: 'flex', background: 'rgba(255,255,255,0.08)', borderRadius: '6px', overflow: 'hidden' }}>
@@ -248,7 +250,7 @@ export default function BookingModal({ onClose }) {
                     onClick={() => setUse24h(mode === '24h')}
                     style={{
                       padding: '4px 8px', fontSize: '11px', fontWeight: 700, border: 'none', cursor: 'pointer',
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontFamily: "'Geist', sans-serif",
                       background: (mode === '24h') === use24h ? 'rgba(255,255,255,0.18)' : 'transparent',
                       color: (mode === '24h') === use24h ? 'white' : '#71717a',
                     }}
@@ -268,7 +270,7 @@ export default function BookingModal({ onClose }) {
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid rgba(255,255,255,0.1)',
                     color: 'white', fontSize: '14px', fontWeight: 600,
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Geist', sans-serif",
                     cursor: 'pointer', transition: 'background 0.15s',
                     width: '100%',
                   }}
@@ -286,6 +288,7 @@ export default function BookingModal({ onClose }) {
       {/* Close button */}
       <button
         onClick={onClose}
+        aria-label="Close"
         style={{
           position: 'fixed', top: '20px', right: '20px',
           width: '36px', height: '36px', borderRadius: '50%',
