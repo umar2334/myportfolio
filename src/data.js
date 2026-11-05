@@ -10,7 +10,7 @@ export const links = {
 
 export const stats = [
   { num: '10', label: 'Products built' },
-  { num: '5', label: 'Android apps & games' },
+  { num: '4', label: 'Android apps & games' },
   { num: '4', label: 'Years coding' },
   { num: '330', label: 'Game levels auto-tested' },
 ];
@@ -20,7 +20,7 @@ export const buildingWith = ['Flutter', 'Next.js', 'React', 'Firebase', 'Supabas
 export const skillGroups = [
   { label: 'AI', items: ['Claude', 'Gemini', 'OpenAI', 'Agents', 'Prompt engineering', 'Cursor', 'Copilot'] },
   { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'shadcn/ui'] },
-  { label: 'Mobile & games', items: ['Flutter', 'Dart', 'Godot', 'GDScript', 'Google Play', 'AdMob', 'Google Maps'] },
+  { label: 'Mobile & games', items: ['Flutter', 'Dart', 'Godot', 'GDScript', 'Google Play', 'AdMob', 'OpenStreetMap'] },
   { label: 'Backend & data', items: ['Node.js', 'Firebase', 'Supabase', 'Postgres', 'REST', 'Webhooks', 'Cron'] },
   { label: 'Automation & ops', items: ['Python', 'Instagram Graph API', 'launchd', 'Git', 'GitHub', 'Vercel', 'Figma'] },
 ];
@@ -130,9 +130,9 @@ export const pipeline = [
 export const projects = [
   {
     title: 'LeadHunter Pro', img: '/projects/leadhunter.webp', status: 'Live', tone: 'green',
-    desc: 'Chrome extension and SaaS dashboard that scans Google Maps and writes AI outreach messages with Gemini.',
-    tech: ['Next.js', 'Gemini', 'Chrome MV3'],
-    links: [{ label: 'Live', href: 'https://leadhunter-pro-pied.vercel.app' }, { label: 'GitHub', href: 'https://github.com/umar2334/leadhunter-pro' }],
+    desc: 'Finds local businesses with weak websites, audits and ranks them, then drafts outreach with Gemini. Includes a Chrome extension.',
+    tech: ['Next.js', 'Supabase', 'Gemini'],
+    links: [{ label: 'Live', href: 'https://leadhunter-pro-lac.vercel.app' }, { label: 'GitHub', href: 'https://github.com/umar2334/leadhunter-pro' }],
   },
   {
     title: 'TurkVerse', img: '/projects/turkverse.webp', status: 'Live', tone: 'green',
@@ -148,9 +148,9 @@ export const projects = [
   },
   {
     title: 'Ghumo', img: '/projects/ghumo.webp', status: 'APK', tone: 'blue',
-    desc: 'Pakistan travel explorer with interactive maps, offline routes, directions and live mountain weather.',
-    tech: ['Flutter', 'Dart', 'Google Maps'],
-    links: [{ label: 'Download APK', href: 'https://github.com/umar2334/Ghumo/releases/download/v1.0.0/Ghumo-v1.0.0.apk' }, { label: 'GitHub', href: 'https://github.com/umar2334/Ghumo' }],
+    desc: 'Pakistan travel companion with an offline destination guide, live weather, maps, trip planning and expense tracking.',
+    tech: ['Flutter', 'Dart', 'OpenStreetMap'],
+    links: [{ label: 'Web demo', href: 'https://ghumo-web.vercel.app' }, { label: 'Download APK', href: 'https://github.com/umar2334/Ghumo/releases/download/v1.1.0/app-arm64-v8a-release.apk' }, { label: 'GitHub', href: 'https://github.com/umar2334/Ghumo' }],
   },
   {
     title: 'Society Management', img: '/projects/society-management.webp', status: 'APK', tone: 'blue',
@@ -160,21 +160,21 @@ export const projects = [
   },
   {
     title: 'Finance App', img: '/projects/finance-app.webp', status: 'Live', tone: 'green',
-    desc: 'Personal expense tracker with interactive charts, budgets and synced financial trends.',
-    tech: ['Flutter', 'Dart', 'Supabase'],
-    links: [{ label: 'Live', href: 'https://personal-finance-visualizer-ochre-psi.vercel.app/' }],
+    desc: 'Track income and expenses with charts, monthly budgets and CSV import, in English and Urdu, with optional cloud sync.',
+    tech: ['React', 'TypeScript', 'Supabase'],
+    links: [{ label: 'Live', href: 'https://personal-finance-visualizer-ochre-psi.vercel.app/' }, { label: 'GitHub', href: 'https://github.com/umar2334/personal-finance-visualizer' }],
   },
   {
-    title: 'E-Commerce UI', img: '/projects/ecommerce-ui.webp', status: 'Live', tone: 'green',
-    desc: 'Responsive storefront front-end with a clean product layout, focused on performance and usability.',
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    links: [{ label: 'Live', href: 'https://umar2334.github.io/project-1-umar-store/' }],
+    title: 'Umar Store', img: '/projects/ecommerce-ui.webp', status: 'Demo', tone: 'blue',
+    desc: 'Demo online store with catalogue filters, cart, wishlist and a three-step checkout. Products are sample data and nothing is for sale.',
+    tech: ['React', 'TypeScript', 'Vite'],
+    links: [{ label: 'Live demo', href: 'https://umar2334.github.io/project-1-umar-store/' }, { label: 'GitHub', href: 'https://github.com/umar2334/project-1-umar-store' }],
   },
   {
-    title: 'FYPMatch', img: '/projects/fypmatch.webp', status: 'In design', tone: 'amber',
+    title: 'FYPMatch', img: '/projects/fypmatch.webp', status: 'Live', tone: 'green',
     desc: 'AI final-year project generator for Pakistani students, returning 5 ranked ideas with a supervisor pitch.',
-    tech: ['Next.js', 'Claude API', 'Figma'],
-    links: [{ label: 'View design', href: 'https://www.figma.com/design/6FSLxWC2xUyPP8fyIu9h3S' }],
+    tech: ['Next.js', 'Gemini', 'Zod'],
+    links: [{ label: 'Live', href: 'https://fypmatch.vercel.app' }, { label: 'GitHub', href: 'https://github.com/umar2334/fypmatch' }],
   },
 ];
 
