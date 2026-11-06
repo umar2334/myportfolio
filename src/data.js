@@ -4,7 +4,7 @@ export const links = {
   whatsapp: 'https://wa.me/923402288644?text=Hi%20Umar%2C%20I%20saw%20your%20portfolio.',
   github: 'https://github.com/umar2334',
   linkedin: 'https://www.linkedin.com/in/umar-khan-dev/',
-  x: 'https://twitter.com/umarkhn895',
+  x: 'https://x.com/Umarkha02529271',
   instagram: 'https://www.instagram.com/umarkhan404/',
 };
 

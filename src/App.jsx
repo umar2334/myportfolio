@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import BookingModal from './components/BookingModal';
 import SectionHead from './components/SectionHead';
 import { BlogIndex, BlogPost, NotFound, WritingSection } from './components/Blog';
+import LinksPage from './components/LinksPage';
 import { articles } from './articles';
 import {
   links, stats, buildingWith, skillGroups, experience, education, featured, pipeline,
@@ -539,7 +540,7 @@ function Contact() {
     ['LinkedIn', 'umar-khan-dev', links.linkedin],
     ['GitHub', 'umar2334', links.github],
     ['Instagram', 'umarkhan404', links.instagram],
-    ['X', 'umarkhn895', links.x],
+    ['X', 'Umarkha02529271', links.x],
   ];
   return (
     <section id="contact" className="section section-alt contact">
@@ -571,6 +572,7 @@ function Contact() {
 function currentPage() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/';
   if (path === '/') return { name: 'home' };
+  if (path === '/links') return { name: 'links' };
   if (path === '/blog') return { name: 'blog' };
   const match = path.match(/^\/blog\/([^/]+)$/);
   const article = match && articles.find((a) => a.slug === match[1]);
@@ -605,6 +607,16 @@ export default function App() {
     jump();
     document.fonts?.ready.then(jump); // web fonts can shift the layout after the first jump
   }, []);
+
+  if (page.name === 'links') {
+    return (
+      <>
+        <div className="backdrop backdrop-links" aria-hidden="true" />
+        <CursorGlow />
+        <LinksPage />
+      </>
+    );
+  }
 
   return (
     <>
