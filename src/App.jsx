@@ -460,18 +460,19 @@ function Certifications() {
             return (
               <Tag className={`card cert reveal${c.featured ? ' cert-featured' : ''}`} key={c.title} {...linkProps}>
                 <div className="cert-top">
-                  <span className="cert-icon"><i className="fas fa-award" aria-hidden="true" /></span>
+                  <span className="cert-icon">
+                    {c.logo ? <img src={c.logo} alt="" width="26" height="26" /> : <i className="fas fa-award" aria-hidden="true" />}
+                  </span>
                   {c.level && <span className="cert-level">{c.level}</span>}
                 </div>
                 <h3>{c.title}</h3>
                 <p className="mono-tag">{[c.issuer, c.code, c.year].filter(Boolean).join(' · ')}</p>
                 {c.desc && <p className="cert-desc">{c.desc}</p>}
-                {c.url && <p className="accent cert-verify">Verify badge <span aria-hidden="true">↗</span></p>}
+                {c.url && <p className="accent cert-verify">Verify <span aria-hidden="true">↗</span></p>}
               </Tag>
             );
           })}
         </div>
-        <p className="cert-more reveal">More certificates are being uploaded.</p>
       </div>
     </section>
   );

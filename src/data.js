@@ -181,18 +181,16 @@ export const projects = [
 /*
   Add real certificates here and the section and nav link appear automatically.
   It stays hidden while this list is empty.
-  { title, issuer, code, year, level, desc, url, featured: true }
-  `level`, `code`, `year`, `desc`, `url` and `featured` are optional.
+  { title, issuer, logo, code, year, level, desc, url, featured: true }
+  `logo`, `level`, `code`, `year`, `desc`, `url` and `featured` are optional.
 */
 export const certifications = [
-  {
-    title: 'AI Fluency: Framework and Foundations',
-    issuer: 'Claude Academy',
-    year: 'Nov 2026',
-    level: 'Course completion',
-    url: 'https://academy.claude.com/verify/88895a76d216cb5434c73e578ea00fd9',
-    featured: true,
-  },
+  { title: 'Building with the Claude API', issuer: 'Anthropic Education', logo: '/apps/claude-mark.svg', year: 'Apr 2026', level: 'Course completion', url: 'https://verify.skilljar.com/c/ggp9trwdzwkb' },
+  { title: 'Introduction to Model Context Protocol', issuer: 'Anthropic Education', logo: '/apps/claude-mark.svg', year: 'Apr 2026', level: 'Course completion', url: 'https://verify.skilljar.com/c/t93cis8m72xd' },
+  { title: 'Claude Code in Action', issuer: 'Anthropic Education', logo: '/apps/claude-mark.svg', year: 'Apr 2026', level: 'Course completion', url: 'https://verify.skilljar.com/c/qqoeae3f8yp6' },
+  { title: 'AI Fluency: Framework & Foundations', issuer: 'Anthropic Education', logo: '/apps/claude-mark.svg', year: 'Apr 2026', level: 'Course completion', url: 'https://verify.skilljar.com/c/3zrrzknpnujz' },
+  { title: 'Introduction to Claude Cowork', issuer: 'Anthropic Education', logo: '/apps/claude-mark.svg', year: 'Apr 2026', level: 'Course completion', url: 'https://verify.skilljar.com/c/9ftwy4no24wo' },
+  { title: 'Claude 101', issuer: 'Anthropic Education', logo: '/apps/claude-mark.svg', year: 'Apr 2026', level: 'Course completion', url: 'https://verify.skilljar.com/c/njbebvm674b3' },
 ];
 
 export const steps = [
