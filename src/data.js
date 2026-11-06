@@ -18,11 +18,11 @@ export const stats = [
 export const buildingWith = ['Flutter', 'Next.js', 'React', 'Firebase', 'Supabase', 'Godot', 'Gemini', 'Claude'];
 
 export const skillGroups = [
-  { label: 'AI', items: ['Claude', 'Gemini', 'OpenAI', 'Agents', 'Prompt engineering', 'Cursor', 'Copilot'] },
+  { label: 'AI', items: ['Claude', 'Gemini', 'OpenAI', 'Prompt engineering', 'Cursor', 'Copilot'] },
   { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'shadcn/ui'] },
   { label: 'Mobile & games', items: ['Flutter', 'Dart', 'Godot', 'GDScript', 'Google Play', 'AdMob', 'OpenStreetMap'] },
   { label: 'Backend & data', items: ['Node.js', 'Firebase', 'Supabase', 'Postgres', 'REST', 'Webhooks', 'Cron'] },
-  { label: 'Automation & ops', items: ['Python', 'Instagram Graph API', 'launchd', 'Git', 'GitHub', 'Vercel', 'Figma'] },
+  { label: 'Automation & ops', items: ['n8n', 'Python', 'Instagram Graph API', 'launchd', 'Git', 'GitHub', 'Vercel', 'Figma'] },
 ];
 
 export const experience = [
@@ -101,12 +101,12 @@ export const featured = [
     },
   },
   {
-    id: 'reel-agent',
-    title: 'JAMBLIT Reel Agent',
-    kind: 'Autonomous Instagram marketing agent',
+    id: 'reel-automation',
+    title: 'JAMBLIT Reel Automation',
+    kind: 'Automated Instagram marketing pipeline',
     status: 'Running daily',
     statusTone: 'green',
-    desc: 'A $0 marketing agent for my own game. It works through a 30-day plan of unique reels, animated skits and real gameplay, then posts the next one every day at 6 PM with no manual work.',
+    desc: 'A $0 marketing automation for my own game. It works through a 30-day plan of unique reels, animated skits and real gameplay, then posts the next one every day at 6 PM with no manual work.',
     highlights: [
       'A different script for every reel',
       'Records real gameplay through the game’s autoplay',
@@ -115,7 +115,7 @@ export const featured = [
     ],
     tech: ['Python', 'Instagram Graph API', 'edge-tts', 'launchd'],
     links: [{ label: 'See the reels', href: 'https://www.instagram.com/jamblit_official/', primary: true }],
-    visual: { type: 'terminal', file: 'agent / daily-run' },
+    visual: { type: 'terminal', file: 'automation / daily-run' },
   },
 ];
 
@@ -204,7 +204,7 @@ export const steps = [
 export const services = [
   { label: 'Production MVP: web', note: '1–3 weeks' },
   { label: 'Production MVP: mobile', note: '2–4 weeks' },
-  { label: 'AI integration or agent', note: 'Project-based' },
+  { label: 'AI integration or automation', note: 'Project-based' },
   { label: 'Marketing & landing pages', note: '3–7 days' },
   { label: 'Existing codebase work', note: 'Hourly' },
 ];
@@ -216,5 +216,5 @@ export const faqs = [
   { q: 'Do you work with international clients?', a: 'Yes. I work async-first, overlap with US and EU mornings and respond within a few hours. Pakistan is GMT+5. Payments via Wise, Payoneer or direct bank.' },
   { q: 'Can you join an existing codebase?', a: 'Yes. I jump into existing React, Next, Flutter or Node projects, do a code-walk and continue from where the previous dev left off. I document what I touch and ship clean PRs.' },
   { q: 'What about post-launch support?', a: 'Free fixes for 14 days after handoff. Beyond that, ongoing support is a monthly retainer or hourly, your choice. Source code, deployment access and docs are always yours.' },
-  { q: 'Are you open to full-time roles?', a: 'Yes, actively. I am open to remote-first software engineering roles globally and on-site in Pakistan. Send me a JD and I’ll get back to you the same day.' },
+  { q: 'Are you open to full-time roles?', a: 'Yes, actively. I am open to remote-first AI engineering and software roles globally and on-site in Pakistan. Send me a JD and I’ll get back to you the same day.' },
 ];

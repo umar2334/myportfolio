@@ -113,7 +113,7 @@ export function BlogPost({ article }) {
           <img src="/profile.jpeg" alt="" width="44" height="44" />
           <div>
             <p>Muhammad Umar</p>
-            <p>AI-native Software Engineer</p>
+            <p>AI Engineer</p>
           </div>
         </div>
         <div className="post-body">

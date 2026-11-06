@@ -223,8 +223,8 @@ function Hero() {
             <p className="chip"><span className="dot dot-green" />Open to roles &amp; freelance · Islamabad</p>
             <h1>I turn ideas into <span className="grad">shipped products.</span></h1>
             <p className="lead">
-              I&apos;m Umar, an AI-native software engineer. I build AI-powered web apps, Android apps,
-              games and the agents that market them.
+              I&apos;m Umar, an AI engineer. I build AI-powered web apps, Android apps,
+              games and the automations that market them.
             </p>
             <div className="btn-row">
               <a className="btn btn-primary" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
@@ -236,7 +236,7 @@ function Hero() {
             <div className="window-bar"><span /><span /><span /><em>umar.json</em></div>
             <img className="hero-photo" src="/profile.jpeg" alt="Muhammad Umar" width="1280" height="1050" />
             <Json rows={[
-              ['role', 'AI-native Software Engineer'],
+              ['role', 'AI Engineer'],
               ['based', 'Islamabad, PK'],
               ['stack', ['React', 'Next.js', 'Flutter']],
               ['open_to', ['roles', 'freelance']],
@@ -280,7 +280,7 @@ function About() {
         <div className="about-right reveal">
           <div className="prose">
             <p>I started coding 4 years ago, right when LLMs began rewriting how software is built. Claude, Cursor and GPT are daily tools for me, and I work across the full stack with Next.js, React, Flutter, Node and Supabase.</p>
-            <p>Recently that has meant going beyond websites: a Flutter CV app with Gemini, a Godot puzzle game going through Google Play testing, and an agent that markets that game by itself.</p>
+            <p>Recently that has meant going beyond websites: a Flutter CV app with Gemini, a Godot puzzle game going through Google Play testing, and an automation that markets that game by itself.</p>
             <p className="prose-strong">Speed is a skill. Taste is a skill. I&apos;m working on both.</p>
             <p>Open to full-time engineering roles and selective freelance work for founders who need to move fast.</p>
           </div>
@@ -376,7 +376,7 @@ function FeaturedVisual({ visual }) {
       )}
       {visual.type === 'terminal' && (
         <div className="terminal">
-          <p><span className="json-dim">$</span> <span className="json-str">agent run</span> <span className="json-dim">--every-day</span> 18:00</p>
+          <p><span className="json-dim">$</span> <span className="json-str">reels run</span> <span className="json-dim">--every-day</span> 18:00</p>
           {pipeline.map(([step, note]) => (
             <p key={step}><span className="tick">✓</span> <b>{step}</b><span className="json-dim">{note}</span></p>
           ))}
@@ -392,7 +392,7 @@ function Work() {
     <section id="work" className="section">
       <div className="container">
         <SectionHead eyebrow="Work" sub="Three new builds first, followed by the rest of my projects.">
-          Apps, games and <span className="accent">agents I&apos;ve built.</span>
+          Apps, games and <span className="accent">automation I&apos;ve built.</span>
         </SectionHead>
 
         <div className="featured">
@@ -631,7 +631,7 @@ export default function App() {
         <div className="container footer-inner">
           <div>
             <p className="footer-name">Muhammad Umar</p>
-            <p>AI-native software engineer. Built in Pakistan. © {new Date().getFullYear()}</p>
+            <p>AI engineer. Built in Pakistan. © {new Date().getFullYear()}</p>
           </div>
           <a className="text-link" href="#">Back to top <span aria-hidden="true">↑</span></a>
         </div>

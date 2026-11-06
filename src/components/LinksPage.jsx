@@ -30,7 +30,7 @@ export default function LinksPage() {
     <main className="links-page">
       <img className="links-photo" src="/profile.jpeg" alt="Muhammad Umar" width="112" height="112" />
       <h1>Muhammad Umar</h1>
-      <p className="links-bio">AI-native software engineer building apps, games and AI agents. Islamabad.</p>
+      <p className="links-bio">AI engineer building AI apps, games and automation. Islamabad.</p>
 
       <nav className="links-buttons" aria-label="Links">
         {buttons.map((item) => (
